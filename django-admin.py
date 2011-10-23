@@ -1,0 +1,1 @@
+/opt/local/lib/python2.5/site-packages/django/bin/django-admin.py

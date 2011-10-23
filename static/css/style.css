@@ -1,0 +1,105 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #fcfcfc;
+    background-image: url(/static/img/test-mijn-ervaring-achtergrond.png);
+    background-repeat: repeat-x;
+}
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    padding: 0px;
+    width: 980px;
+    background-image: url(/static/img/test-mijn-ervaring-header.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    text-align: left;
+    height: 600px;
+    display: inline-block;
+}
+#wizard {
+    margin-left: 245px;
+}
+#header {
+    font-size: 40px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    font-style: italic;
+    color: #fcfcfc;
+    margin-left: 245px;
+    margin-top: 80px;
+    padding: 0px;
+}
+#header-phrase {
+    font-size: 22px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    font-style: italic;
+    color: #888888;
+    margin-left: 245px;
+    margin-top: 30px;
+    padding: 0px;
+}
+#icons {
+    margin-top: 100px;
+    margin-left: 245px;
+    vertical-align: top;
+    text-align: center;
+}
+#phrases {
+    margin-left: 245px;
+    vertical-align: top;
+    text-align: center;
+}
+#certificaat {
+    width: 233px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    height: 130px;
+}
+#opleiding {
+    width: 233px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    height: 130px;
+}
+#diploma {
+    width: 233px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    height: 130px;
+}
+.phrase {
+    display: inline-block;
+    width: 233px;
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    font-style: italic;
+    color: #888888;
+}
+#aankondiging {
+    font-size: 20px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    font-style: italic;
+    color: #ffa500;
+    margin-left: 425px;
+    margin-top: 60px;
+}
+#naar-rapasso {
+    font-size: 16px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    font-style: italic;
+    color: #888888;
+    margin-left: 305px;
+    margin-top: 20px;
+    vertical-align: top;
+}
+a {
+    color: #ffa500;
+}

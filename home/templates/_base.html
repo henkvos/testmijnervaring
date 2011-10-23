@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="X2User B.V.">
+        <meta name="keywords" content="ervaringscertificaat, evc, e-Portfolio, ePortfolio, ervaring, test, opleiding, diploma, cohort, kwalificatiedossier, mbo">
+        <meta name="description" content="Geen diploma maar wel ervaring. Doe dan hier de test om jouw kennis en ervaring te testen. Toegespitst voor MBO kwalificatie dossiers.">
+        <title>{% block title %}Test Mijn Ervaring{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ MEDIA_URL }}/img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="{{ MEDIA_URL }}/img/favicon.ico" />
+        
+        <script type="text/javascript" src="/static/js/jquery-1.6.4.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
+        <!-- custom scripts -->
+        <script type="text/javascript" src="static/js/wizard.js"></script>
+        <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+        <link href="/static/css/smart_wizard.css" rel="stylesheet" type="text/css">
+        
+    </head>
+    <body>
+        
+        <div id="content">
+            <div id="header">
+                Welk beroep past bij jouw ervaring?
+            </div>
+            <div id="header-phrase">
+                Geen diploma maar wel ervaring? Test nu jouw kennis en ervaring!
+            </div>
+            <div id="app">
+                {% block content %}{% endblock %}
+            </div>
+                
+        </div>
+        
+    </body>
+</html>
