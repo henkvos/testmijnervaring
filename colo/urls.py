@@ -1,0 +1,40 @@
+from django.conf.urls.defaults import patterns, url
+from colo.views import ListView, DetailView, ColoView, ListSearchView, ListQuickSearchView
+from colo.resources import KenniscentrumResource, CompetentieResource, ComponentResource, DossierResource, KerntaakResource, WerkprocesResource, UitstroomResource, Uitstroom_KerntaakResource, Uitstroom_WerkprocesResource, Uitstroom_CompetentieResource, VaardigheidResource, Uitstroom_VaardigheidResource, Uitstroom_ComponentResource
+
+
+urlpatterns = patterns('',
+    url(r'^$', ColoView.as_view()),
+    url(r'^/kenniscentra$', ListView.as_view(resource=KenniscentrumResource), name='Kenniscentra'),
+    url(r'^/kenniscentra/(?P<pk>[^/]+)/$', DetailView.as_view(resource=KenniscentrumResource), name='Kenniscentrum'),
+    url(r'^/competenties$', ListView.as_view(resource=CompetentieResource), name = 'Competenties'),
+    url(r'^/competenties/(?P<pk>[^/]+)/$', DetailView.as_view(resource=CompetentieResource), name = 'Competentie'),
+    url(r'^/competenties/componenten$', ListView.as_view(resource=ComponentResource), name = 'Componenten'),
+    url(r'^/competenties/componenten/(?P<pk>[^/]+)/$', DetailView.as_view(resource=ComponentResource), name = 'Component'),
+    url(r'^/dossiers$', ListView.as_view(resource=DossierResource), name = 'Dossiers'),
+    url(r'^/dossiers/(?P<pk>[^/]+)/$', DetailView.as_view(resource=DossierResource), name = 'Dossier'),
+    url(r'^/dossiers/startswith/(\w+)/$', ListQuickSearchView.as_view(resource=DossierResource), name = 'Dossier-QuickSearch'),
+    url(r'^/dossiers/contains/(\w+)/$', ListSearchView.as_view(resource=DossierResource), name = 'Dossier-Search'),
+    url(r'^/kerntaken$', ListView.as_view(resource=KerntaakResource), name = 'Kerntaken' ),
+    url(r'^/kerntaken/(?P<pk>[^/]+)/$', DetailView.as_view(resource=KerntaakResource), name = 'Kerntaak' ),
+    url(r'^/werkprocessen$', ListView.as_view(resource=WerkprocesResource), name = 'Werkprocessen' ),
+    url(r'^/werkprocessen/(?P<pk>[^/]+)/$', DetailView.as_view(resource=WerkprocesResource), name = 'Werkproces' ),
+    url(r'^/vaardigheden$', ListView.as_view(resource=VaardigheidResource), name = 'Vaardigheden' ),
+    url(r'^/vaardigheden/(?P<pk>[^/]+)/$', DetailView.as_view(resource=VaardigheidResource), name = 'Vaardigheid' ),
+    url(r'^/uitstromen/$', ListView.as_view(resource=UitstroomResource), name = 'Uitstromen'),
+    url(r'^/uitstromen/crebo/(?P<crebo>\w+)/$', ListView.as_view(resource=UitstroomResource), name = 'Uitstromen-Crebo'),
+    url(r'^/uitstromen/startswith/(\w+)/$', ListQuickSearchView.as_view(resource=UitstroomResource), name = 'Uitstromen-QuickSearch'),
+    url(r'^/uitstromen/contains/(\w+)/$', ListSearchView.as_view(resource=UitstroomResource), name = 'Uitstromen-Search'),
+    url(r'^/uitstromen/(?P<pk>[^/]+)/$', DetailView.as_view(resource=UitstroomResource), name = 'Uitstroom'),
+    url(r'^/uitstroom/kerntaken$', ListView.as_view(resource=Uitstroom_KerntaakResource), name = 'Uitstroom-Kerntaken'),
+    url(r'^/uitstroom/kerntaken/(?P<pk>[^/]+)/$', DetailView.as_view(resource=Uitstroom_KerntaakResource), name = 'Uitstroom-Kerntaak'),
+    url(r'^/uitstroom/werkprocessen$', ListView.as_view(resource=Uitstroom_WerkprocesResource), name = 'Uitstroom-Werkprocessen'),
+    url(r'^/uitstroom/werkprocessen/(?P<pk>[^/]+)/$', DetailView.as_view(resource=Uitstroom_WerkprocesResource), name = 'Uitstroom-Werkproces'),
+    url(r'^/uitstroom/werkprocessen/competenties$', ListView.as_view(resource=Uitstroom_CompetentieResource), name = 'Uitstroom-Competenties'),
+    url(r'^/uitstroom/werkprocessen/competenties/(?P<pk>[^/]+)/$', DetailView.as_view(resource=Uitstroom_CompetentieResource), name = 'Uitstroom-Competentie'),
+    url(r'^/uitstroom/werkprocessen/competenties/vaardigheden$', ListView.as_view(resource=Uitstroom_VaardigheidResource), name = 'Uitstroom-Vaardigheden'),
+    url(r'^/uitstroom/werkprocessen/competenties/vaardigheden/(?P<pk>[^/]+)/$', DetailView.as_view(resource=Uitstroom_VaardigheidResource), name = 'Uitstroom-Vaardigheid'),
+    url(r'^/uitstroom/werkprocessen/competenties/componenten$', ListView.as_view(resource=Uitstroom_ComponentResource), name = 'Uitstroom-Componenten'),
+    url(r'^/uitstroom/werkprocessen/competenties/componenten/(?P<pk>[^/]+)/$', DetailView.as_view(resource=Uitstroom_ComponentResource), name = 'Uitstroom-Component'),
+
+)

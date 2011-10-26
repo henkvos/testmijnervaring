@@ -10,3 +10,4 @@ class Wizard(TemplateView):
     template_name = 'wizard.html'
 
 
+

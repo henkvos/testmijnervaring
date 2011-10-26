@@ -48,7 +48,7 @@ class Component(models.Model):
     nr = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     tenant = models.IntegerField(default=0,blank=True, null=True)
-    competence = models.ForeignKey(Competence, blank=True, null=True)
+    competence = models.ForeignKey(Competence, blank=True, null=True, related_name='components')
     
     def __unicode__(self):
         return self.name

@@ -1,0 +1,160 @@
+{% load urlize_quoted_links %}{% load add_query_param %}<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="X2User B.V." />
+        <meta name="keywords" content="ervaringscertificaat, evc, e-Portfolio, ePortfolio, ervaring, test, opleiding, diploma, cohort, kwalificatiedossier, mbo" />
+        <meta name="description" content="Geen diploma maar wel ervaring. Doe dan hier de test om jouw kennis en ervaring te testen. Toegespitst voor MBO kwalificatie dossiers." />
+        <title>{% block title %}Test Mijn Ervaring{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ MEDIA_URL }}/img/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="{{ MEDIA_URL }}/img/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href='{{ADMIN_MEDIA_PREFIX}}css/base.css'/>
+     <link rel="stylesheet" type="text/css" href='{{ADMIN_MEDIA_PREFIX}}css/forms.css'/>
+     <style>
+       /* Override some of the Django admin styling */
+       #site-name a {color: #F4F379 !important;}
+       .errorlist {display: inline !important}
+       .errorlist li {display: inline !important; background: white !important; color: black !important; border: 0 !important;}
+	   /* Custom styles */
+	   .version{font-size:8px;}
+	   #header {
+        background: none repeat scroll 0 0 #65b3e1;
+        color: #fcfcfc;
+        overflow: hidden;
+        height: 37px;
+        }
+        #branding h1 {
+    padding: 0 10px;
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: normal;
+    color: #61a5cf;
+}
+        #site-name a {
+    color: #fcfcfc !important;
+    margin-left: 10px;
+}
+.module h2, .module caption, .inline-group h2 {
+    margin: 0;
+    padding: 2px 5px 3px 5px;
+    font-size: 11px;
+    text-align: left;
+    font-weight: bold;
+    background: #65b3e1;
+    color: white;
+}
+
+     </style>
+     
+  </head>
+  <body>
+  
+  <div id="container">
+     <div id=logo style="float:left;"><img src='/static/img/logo.png' /></div>
+	<div id="header">
+	   
+		<div id="branding">
+		  <h1 id="site-name"><a href='http://www.rapasso.nl'>Rapasso REST framework voor MBO kwalificatie dossiers</a></h1>
+		</div>
+	</div>
+	
+	<div class="breadcrumbs" style="margin-top:30px">
+	{% for breadcrumb_name, breadcrumb_url in breadcrumblist %}
+    <a href="{{breadcrumb_url}}">{{breadcrumb_name}}</a> {% if not forloop.last %}&rsaquo;{% endif %}
+    {% endfor %}
+    </div>
+
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+
+	<div class='content-main'>
+	    <h1>{{ name }}</h1>
+	    <p>{% if markeddown %}{% autoescape off %}{{ markeddown }}{% endautoescape %}{% else %}{{ description|linebreaksbr }}{% endif %}</p>
+	    <div class='module'>
+	    <pre><b>{{ response.status }} {{ response.status_text }}</b>{% autoescape off %}
+{% for key, val in response.headers.items %}<b>{{ key }}:</b> {{ val|urlize_quoted_links }}
+{% endfor %}
+{{ content|urlize_quoted_links }}</pre>{% endautoescape %}</div>
+
+	{% if 'GET' in view.allowed_methods %}
+			<form>
+				<fieldset class='module aligned'>
+				<h2>GET {{ name }}</h2>
+				<div class='submit-row' style='margin: 0; border: 0'>
+				<a href='{{ request.get_full_path }}' rel="nofollow" style='float: left'>GET</a>
+				{% for format in available_formats %}
+				  {% with FORMAT_PARAM|add:"="|add:format as param %}
+				    [<a href='{{ request.get_full_path|add_query_param:param }}' rel="nofollow">{{ format }}</a>]
+				  {% endwith %}
+				{% endfor %}
+				</div>
+				</fieldset>
+			</form>
+	{% endif %}
+	
+	{# Only display the POST/PUT/DELETE forms if method tunneling via POST forms is enabled and the user has permissions on this view. #}	
+	{% if METHOD_PARAM and response.status != 403 %}
+
+		{% if 'POST' in view.allowed_methods %}
+				<form action="{{ request.get_full_path }}" method="post" {% if post_form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+				<fieldset class='module aligned'>
+					<h2>POST {{ name }}</h2>
+				    {% csrf_token %}
+				    {{ post_form.non_field_errors }}
+					{% for field in post_form %}
+					<div class='form-row'>
+					    {{ field.label_tag }}
+					    {{ field }}
+					    <span class='help'>{{ field.help_text }}</span>
+					    {{ field.errors }}
+					</div>
+					{% endfor %}
+					<div class='submit-row' style='margin: 0; border: 0'>
+						<input type="submit" value="POST" class="default" />
+					</div>
+				</fieldset>
+				</form>
+		{% endif %}
+		
+		{% if 'PUT' in view.allowed_methods %}
+				<form action="{{ request.get_full_path }}" method="post" {% if put_form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+				<fieldset class='module aligned'>
+					<h2>PUT {{ name }}</h2>
+					<input type="hidden" name="{{ METHOD_PARAM }}" value="PUT" />
+					{% csrf_token %}
+					{{ put_form.non_field_errors }}
+					{% for field in put_form %}
+					<div class='form-row'>
+					    {{ field.label_tag }}
+					    {{ field }}
+					    <span class='help'>{{ field.help_text }}</span>
+					    {{ field.errors }}			    
+					</div>
+					{% endfor %}
+					<div class='submit-row' style='margin: 0; border: 0'>			
+					  <input type="submit" value="PUT" class="default" />
+					</div>
+				</fieldset>
+				</form>
+		{% endif %}
+		
+		{% if 'DELETE' in view.allowed_methods %}
+				<form action="{{ request.get_full_path }}" method="post">
+				<fieldset class='module aligned'>			
+					<h2>DELETE {{ name }}</h2>
+				    {% csrf_token %}
+					<input type="hidden" name="{{ METHOD_PARAM }}" value="DELETE" />
+					<div class='submit-row' style='margin: 0; border: 0'>			
+					  <input type="submit" value="DELETE" class="default" />
+					</div>
+				</fieldset>
+				</form>
+		{% endif %}
+
+	{% endif %}
+	</div>
+	</div>
+	</div>
+  </body>
+</html>

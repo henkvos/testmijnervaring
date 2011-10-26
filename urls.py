@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     #(r'^$', TemplateView.as_view(template_name="home.html")),
     (r'^$', Home.as_view()),
     (r'^startwizard', Wizard.as_view()),
+    (r'^colo', include('colo.urls')),
     # Examples:
     # url(r'^$', 'testmijnervaring.views.home', name='home'),
     # url(r'^testmijnervaring/', include('testmijnervaring.foo.urls')),
