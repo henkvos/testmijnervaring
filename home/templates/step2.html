@@ -1,0 +1,37 @@
+<h3 class="StepTitle">Test je ervaring voor {{ uitstroom_title }}</h3>
+<span style="margin-top=15px; margin-left: 15px; margin-bottom: 15px">Vul hieronder in waar je ervaring mee hebt (1=geen, 2=weinig, 3=gemiddeld, 4=meer dan gemiddeld, 5=veel):</span>
+<div id="omschrijving" class="ui-widget" style="margin-left:10px; margin-top: 0px; font-family:Arial;">
+    <div id="kerntakenwerkprocessen" style="height: 230px; width: 735px; overflow: auto; padding: 5px" class="ui-widget-content">
+        <form id="ervaringstest">
+            <input type="hidden" name="uitstroom_id" value="{{ uitstroom_nr }}" />
+         </form>
+       <form id="testwerkprocessen">
+            <table cellspacing="0">
+                {% for k in kerntaken %}
+                <tr>
+                    <td colspan="3"><b>{{ k.title }}</b></td>
+                </tr>
+                {% for w in k.werkprocessen %}
+                <tr class="tr-werkproces">
+                    <td width="20"></td>
+                    <td width="500">{{ w.title }}</td>
+                    <td width="200">
+                    <input type="radio" class="werkprocess" name="{{ w.id }}" value="1" {% ifequal w.score '1' %} checked="checked" {% endifequal %} />
+                    1
+                    <input type="radio" class="werkprocess" name="{{w.id}}" value="2" {% ifequal w.score '2' %} checked="checked" {% endifequal %} />
+                    2
+                    <input type="radio"  class="werkprocess"name="{{w.id}}" value="3" {% ifequal w.score '3' %} checked="checked" {% endifequal %} />
+                    3
+                    <input type="radio"  class="werkprocess"name="{{w.id}}" value="4" {% ifequal w.score '4' %} checked="checked" {% endifequal %} />
+                    4
+                    <input type="radio"  class="werkprocess" name="{{w.id}}" value="5" {% ifequal w.score '5' %} checked="checked" {% endifequal %} />
+                    5 </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+        </form>
+        <br />
+        <br />
+    </div>
+</div>

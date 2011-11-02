@@ -101,6 +101,16 @@ class KerntaakAdmin(admin.ModelAdmin):
         WerkprocesInline,
     ]
     
+class Uitstroom_ErvaringstestWerkprocesInline(admin.TabularInline):
+    model = Uitstroom_ErvaringstestWerkproces
+    extra = 1
+    
+class Uitstroom_ErvaringstestAdmin(admin.ModelAdmin):
+    model = Uitstroom_Ervaringstest
+    inlines = [
+              Uitstroom_ErvaringstestWerkprocesInline, 
+    ]
+    
 
 admin.site.register(Session, SessionAdmin)
 admin.site.register(KBB, KBBAdmin)
@@ -109,3 +119,4 @@ admin.site.register(Dossier, DossierAdmin)
 admin.site.register(Uitstroom, UitstroomAdmin)
 admin.site.register(Kerntaak, KerntaakAdmin)
 admin.site.register(Uitstroom_Werkproces, Uitstroom_WerkprocesAdmin)
+admin.site.register(Uitstroom_Ervaringstest, Uitstroom_ErvaringstestAdmin)

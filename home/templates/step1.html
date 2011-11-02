@@ -1,0 +1,63 @@
+<h2 class="StepTitle">Kies je huidige functie</h2>
+<div id="selectBeroep">
+    <style>
+        .ui-autocomplete-loading {
+            background: white url('/static/img/ui-anim_basic_16x16.gif') right center no-repeat;
+        }
+    </style>
+    <script>
+        $(function() {
+            $("#beroep").autocomplete({
+                source : function(request, response) {
+                    $.ajax({
+                        //url: "/colo/dossiers/startswith",
+                        url : "/colo/uitstromen/contains",
+                        dataType : "json",
+                        data : {
+
+                            term : request.term
+                        },
+                        success : function(data) {
+                            response($.map(data, function(item) {
+                                return {
+                                    label : item.title,
+                                    value : item.title,
+                                    id : item.nr
+                                }
+                            }));
+                        }
+                    });
+                },
+                minLength : 2,
+                focus : function(event, ui) {
+                    $("#beroep").val(ui.item.title);
+                    return false;
+                },
+                select : function(event, ui) {
+                    var url = '/colo/uitstromen/' + ui.item.id + '/';
+                    var resp = $.ajax({
+                        url : url,
+                        dataType : 'json',
+                        success : function(data) {
+                            $('#log').empty();
+                            $("<div/>").html(data.contextvandeuitstroom).prependTo("#log");
+                            $("#log").scrollTop(0);
+                            $("#omschrijving").fadeIn("slow");
+                            uitstroomid = ui.item.id;
+                            $.post("/storeselection", { uitstroom_nr: uitstroomid } );
+                            setCookie('uitstroom_nr',uitstroomid,'1');
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+    <div class="ui-widget" style="margin-left:10px; margin-top: 20px">
+        <label for="beroep">Beroep: </label>
+        <input id="beroep" style="width:350px" />
+    </div>
+</div>
+<div id="omschrijving" class="ui-widget" style="margin-left:10px; margin-top: 20px; font-family:Arial; display:none;">
+    Omschrijving <div id="log" style="height: 170px; width: 735px; overflow: auto; padding: 5px" class="ui-widget-content"></div>
+</div>

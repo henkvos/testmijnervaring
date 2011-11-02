@@ -1,0 +1,59 @@
+<h3 class="StepTitle">Geef aan wat je wil</h3>
+<!-- <span style="margin-top=15px; margin-left: 15px; margin-bottom: 15px">Vul hieronder in wat je zou willen:</span> -->
+
+<div id="omschrijving" class="ui-widget" style="margin-left:10px; margin-top: 10px; font-family:Arial;">
+    <div id="stap3_keuzes" style="height: 240px; width: 735px; overflow: auto; padding: 5px" class="ui-widget-content">
+        <form id="stap3_toekomst">
+            
+            <table cellspacing="0">
+
+                <tr class="tr-werkproces">
+                    <td width="20">1.</td>
+                    <td width="500">Ik wil graag een ervaringscertficaat (EVC procedure volgen)</td>
+                    <td width="200">
+                    <input type="radio" name="evc" value="1" {% ifequal evc '1' %} checked="checked" {% endifequal %} />
+                    Ja
+                    <input type="radio" name="evc" value="0" {% ifequal evc '0' %} checked="checked" {% endifequal %} />
+                    Nee
+                    
+                </tr>
+                <tr class="tr-werkproces">
+                    <td width="20">2.</td>
+                    <td width="500">Ik wil graag een <span id="#ervaringsprofiel">ervaringsprofiel </span>(EVP procedure volgen)
+             </td>
+                    <td width="200">
+                    <input type="radio" name="evp" value="1" {% ifequal evp '1' %} checked="checked" {% endifequal %} />
+                    Ja
+                    <input type="radio" name="evp" value="0" {% ifequal evp '0' %} checked="checked" {% endifequal %} />
+                    Nee
+                    
+                </tr>
+                <tr class="tr-werkproces">
+                    <td width="20">3.</td>
+                    <td width="500">Ik wil graag hulp van een loopbaancoach</td>
+                    <td width="200">
+                    <input type="radio" name="loopbaancoach" value="1" {% ifequal coach '1' %} checked="checked" {% endifequal %} />
+                    Ja
+                    <input type="radio" name="loopbaancoach" value="0" {% ifequal coach '0' %} checked="checked" {% endifequal %} />
+                    Nee
+                    
+                </tr>
+                <tr>
+                    <td colspan="3"><br /></td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="3">Vul hieronder je motivatie in:</td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="3"><textarea name="motivatie" style="padding: 3px; width: 720px; height: 125px;font-family: Arial, Helvetica, sans-serif; resize: none;">{{ motivatie }}</textarea></td>
+                    
+                </tr>
+                
+                
+            </table>
+            
+        </form>
+    </div>
+</div>

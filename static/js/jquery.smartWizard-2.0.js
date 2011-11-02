@@ -153,7 +153,8 @@
                     var hasContent =  selStep.data('hasContent');
                     stepNum = stepIdx+1;
                     if(ajaxurl && ajaxurl.length>0){
-                       if(options.contentCache && hasContent){
+                       if(hasContent && stepNum==1){
+                       //if(options.contentCache && hasContent){
                            showStep(stepIdx);                          
                        }else{
                            $.ajax({
@@ -325,7 +326,7 @@
           errorSteps:[],    // Array Steps with errors
           labelNext:'Volgende',
           labelPrevious:'Vorige',
-          labelFinish:'Afronden',          
+          labelFinish:'Verzenden',          
           onLeaveStep: null, // triggers when leaving a step
           onShowStep: null,  // triggers when showing a step
           onFinish: null  // triggers when Finish button is clicked

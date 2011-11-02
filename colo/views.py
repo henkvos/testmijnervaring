@@ -31,8 +31,8 @@ class ListQuickSearchView(ListModelView):
     queryset = None
 
     def get(self, request, *args, **kwargs):
+        term = request.GET.get('term', '')
         model = self.resource.model
-        startswith = args[0]
         queryset = self.queryset if self.queryset is not None else model.objects.all()
 
         if hasattr(self, 'resource'):
@@ -43,15 +43,15 @@ class ListQuickSearchView(ListModelView):
         if ordering:
             args = as_tuple(ordering)
             queryset = queryset.order_by(*args)
-        return queryset.filter(title__startswith=startswith)
+        return queryset.filter(title__startswith=term)
     
 class ListSearchView(ListModelView):
     allowed_methods = ('GET',)
     queryset = None
 
     def get(self, request, *args, **kwargs):
+        term = request.GET.get('term', '')
         model = self.resource.model
-        contains = args[0]
         queryset = self.queryset if self.queryset is not None else model.objects.all()
 
         if hasattr(self, 'resource'):
@@ -62,4 +62,4 @@ class ListSearchView(ListModelView):
         if ordering:
             args = as_tuple(ordering)
             queryset = queryset.order_by(*args)
-        return queryset.filter(title__contains=contains)
+        return queryset.filter(title__contains=term)

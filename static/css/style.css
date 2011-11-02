@@ -9,6 +9,19 @@ body {
     background-image: url(/static/img/test-mijn-ervaring-achtergrond.png);
     background-repeat: repeat-x;
 }
+
+table td, table th {
+    border: 0px solid black;
+    border-collapse: collapse;
+    border-radius: 0px;
+    border-spacing:0;
+    border-color:#888888;
+}
+
+.tr-werkproces td {
+    border-bottom:1px solid #dedede;
+}
+
 #content {
     margin-left: auto;
     margin-right: auto;
@@ -23,8 +36,15 @@ body {
     display: inline-block;
 }
 #wizard {
-    margin-left: 245px;
+    margin-left: 200px;
+    margin-top: 30px;
 }
+
+.ui-autocomplete-loading {
+                    background: white url('/static/img/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+
 #header {
     font-size: 40px;
     font-family: "Lucida Sans Unicode", sans-serif;

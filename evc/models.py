@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from django.utils.html import strip_tags
 
 ##### specific for Dutch EVC procedures #####
 
@@ -220,6 +220,51 @@ class Uitstroom_Vaardigheid(models.Model):
     tenant = models.IntegerField(default=0,blank=True, null=True)
     def __unicode__(self):
         return  self.competentie.title + ">" + self.title
+    
+class Uitstroom_Ervaringstest(models.Model):
+    choices = (
+               ('0','Nee'),
+               ('1','Ja'),
+               )
+    uuid = models.CharField(primary_key=True, max_length=36)
+    session_key = models.CharField(max_length=32)
+    uitstroom = models.ForeignKey(Uitstroom, related_name='ervaringstesten')
+    remote_ip = models.IPAddressField(blank=True, null=True)
+    remote_host = models.CharField(max_length=255, null=True, blank=True)
+    referer = models.URLField(max_length=255, null=True, blank=True)
+    user_agent = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=32, null=True, blank=True)
+    last_name = models.CharField(max_length=64, null=True, blank=True)
+    email = models.EmailField(max_length=120, null=True, blank=True)
+    zipcode = models.CharField(max_length=16, null=True, blank=True)
+    phone = models.CharField(max_length=32, null=True, blank=True)
+    evp = models.CharField(max_length=2, choices=choices, blank=True, null=True)
+    evc = models.CharField(max_length=2, choices=choices, blank=True, null=True)
+    coach = models.CharField(max_length=2, choices=choices, blank=True, null=True)
+    motivatie = models.TextField(null=True, blank=True)
+    
+    
+    def __unicode__(self):
+        return  self.uuid +": " + self.uitstroom.title
+    
+    def name(self):
+        return  str(self.uitstroom.title)
+    
+    def omschrijving(self):
+        return strip_tags(self.uitstroom.contextvandeuitstroom)
+    
+
+class Uitstroom_ErvaringstestWerkproces(models.Model):
+    scores = (
+             ('1','Geen'),
+             ('2','Weinig'),
+             ('3','Gemiddeld'),
+             ('4','Meer dan gemiddeld'),
+             ('5','Veel'),
+             )
+    uitstroom_ervaringstest = models.ForeignKey(Uitstroom_Ervaringstest)
+    uitstroom_werkproces = models.ForeignKey(Uitstroom_Werkproces)
+    score = models.CharField(max_length=2, choices=scores, blank=True, null=True)
 
     
 

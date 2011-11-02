@@ -10,11 +10,22 @@
         <link rel="icon" href="{{ MEDIA_URL }}/img/favicon.ico" />
         
         <script type="text/javascript" src="/static/js/jquery-1.6.4.js"></script>
+        <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
+        
         <!-- custom scripts -->
-        <script type="text/javascript" src="static/js/wizard.js"></script>
+        <link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+        <!-- <script type="text/javascript" src="/static/js/qtip-min.js"></script> -->
+        <script type="text/javascript" src="/static/js/wizard.js"></script>
+        
         <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
         <link href="/static/css/smart_wizard.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript">
+            //global vars
+            var uitstroomid = 0;
+            //var csrf_token = '{{ csrf_token }}';
+            
+        </script>
         
     </head>
     <body>
