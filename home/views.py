@@ -130,7 +130,6 @@ class ProcessTest(View):
                                                                       uitstroom=uitstroom, 
                                                                       session_key=request.session.session_key,
                                                                       remote_ip = cgi.get('REMOTE_ADDR',''),
-                                                                      remote_host = cgi.get('REMOTE_HOST',''),
                                                                       referer = cgi.get('HTTP_REFERER',''),
                                                                       user_agent = cgi.get('HTTP_USER_AGENT')
                                                                       )
