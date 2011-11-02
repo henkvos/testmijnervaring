@@ -122,16 +122,14 @@ class ProcessTest(View):
     
     def post(self, request):
         testdata = request.POST
-        cgi = request.META
+        #cgi = request.META
         uitstroom_nr = request.session['uitstroom_nr']
         uitstroom = Uitstroom.objects.get(pk=uitstroom_nr)
         test, created = Uitstroom_Ervaringstest.objects.get_or_create(
                                                                       pk=request.session['test_id'], 
                                                                       uitstroom=uitstroom, 
                                                                       session_key=request.session.session_key,
-                                                                      remote_ip = cgi.get('REMOTE_ADDR',''),
-                                                                      referer = cgi.get('HTTP_REFERER',''),
-                                                                      user_agent = cgi.get('HTTP_USER_AGENT')
+                                                                      
                                                                       )
 
         test.save()
