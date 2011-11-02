@@ -129,10 +129,10 @@ class ProcessTest(View):
                                                                       pk=request.session['test_id'], 
                                                                       uitstroom=uitstroom, 
                                                                       session_key=request.session.session_key,
-                                                                      remote_ip = cgi['REMOTE_ADDR'],
-                                                                      #remote_host = cgi['REMOTE_HOST'],
-                                                                      referer = cgi['HTTP_REFERER'],
-                                                                      user_agent = cgi['HTTP_USER_AGENT']
+                                                                      remote_ip = cgi.get('REMOTE_ADDR',''),
+                                                                      remote_host = cgi.get('REMOTE_HOST',''),
+                                                                      referer = cgi.get('HTTP_REFERER',''),
+                                                                      user_agent = cgi.get('HTTP_USER_AGENT')
                                                                       )
 
         test.save()
