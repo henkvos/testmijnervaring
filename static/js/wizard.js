@@ -36,6 +36,14 @@ $(document).ready(function() {
 				function submitTest() {
 					naw = $('#stap4_aanvraag').serializeArray();
 					$.post('/submittest', naw);
+					//$("#app").load('/thankyou');
+					$.post('/thankyou', function(data){
+						$('#app').html(data);
+					});
+					//$('#app').empty();
+                    //$("<div/>").html(html).prependTo("#app");
+					
+					
 				};
 			});
 	// send crsf token for django's csrf protection

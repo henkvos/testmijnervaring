@@ -250,6 +250,9 @@ class Uitstroom_Ervaringstest(models.Model):
     def name(self):
         return  str(self.uitstroom.title)
     
+    def participant(self):
+        return  self.first_name + " " + self.last_name
+    
     def omschrijving(self):
         return strip_tags(self.uitstroom.contextvandeuitstroom)
     

@@ -1,279 +1,97 @@
 <html>
-    <head>
-        <style type="text/css">
-            
-.swMain {
-  position:relative;
-  display:block;
-  margin:0;
-  padding:0;
-  border: 0px solid #CCC;
-  overflow:visible;
-  float:left;
-  width:780px;
-}
-.swMain .stepContainer {
-  display:block;
-  position: relative;
-  margin: 0;
-  padding:0;    
-  border: 0px solid #CCC;    
-  overflow:hidden;
-  clear:both;
-  height:300px;
-}
-
-.swMain .stepContainer div.content {
-  display:block;
-  position: absolute;  
-  float:left;
-  margin: 0;
-  padding:5px;    
-  border: 1px solid #CCC; 
-  font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
-  color:#5A5655;   
-  background-color:#F8F8F8;  
-  height:300px;
-  text-align:left;
-  overflow:visible;    
-  z-index:88; 
-  -webkit-border-radius: 5px;
-  -moz-border-radius  : 5px;
-  width:768px;
-  clear:both;
-}
-
-.swMain div.actionBar {
-  display:block;
-  position: relative; 
-  clear:both;
-  margin:             3px 0 0 0;   
-  border:             1px solid #CCC;
-  padding:            0;    
-  color:              #5A5655;   
-  background-color:   #F8F8F8;
-  height:40px;
-  text-align:left;
-  overflow:auto;    
-  z-index:88; 
-
-  -webkit-border-radius: 5px;
-  -moz-border-radius  : 5px;
-  left:0;
-}
-
-.swMain .stepContainer .StepTitle {
-  display:block;
-  position: relative;
-  margin:0;   
-  border:1px solid #E0E0E0;
-  padding:5px;   
-  font: bold 16px Verdana, Arial, Helvetica, sans-serif; 
-  color:#5A5655;   
-  background-color:#E0E0E0;
-  clear:both;
-  text-align:left; 
-  z-index:88;
-  -webkit-border-radius: 5px;
-  -moz-border-radius  : 5px;    
-}
-.swMain ul.anchor {
-  position: relative;
-  display:block;
-  float:left;
-  list-style: none;
-  padding: 0px;  
-  margin: 10px 0;      
-  clear: both;
-  border: 0px solid #CCCCCC;    
-  background: transparent; /*#EEEEEE */
-}
-.swMain ul.anchor li{ 
-  position: relative; 
-  display:block;
-  margin: 0;
-  padding: 0; 
-  padding-left:3px;
-  padding-right: 3px;
-  border: 0px solid #E0E0E0;      
-  float: left;
-}
-/* Anchor Element Style */
-.swMain ul.anchor li a {
-  display:block;
-  position:relative;
-  float:left;
-  margin:0;
-  padding:3px;
-  height:60px;
-  width:180px;
-  text-decoration: none;
-  outline-style:none;
-  -moz-border-radius  : 5px;
-  -webkit-border-radius: 5px;
-  z-index:99;
-}
-.swMain ul.anchor li a .stepNumber{
-  position:relative;
-  float:left;
-  width:30px;
-  text-align: center;
-  padding:5px;
-  padding-top:0;
-  font: bold 30px Verdana, Arial, Helvetica, sans-serif;
-}
-.swMain ul.anchor li a .stepDesc{
-  position:relative;
-  display:block;
-  float:left;
-  text-align: left;
-  padding:5px;
-
-  font: bold 14px Verdana, Arial, Helvetica, sans-serif;
-}
-.swMain ul.anchor li a .stepDesc small{
-  font: normal 12px Verdana, Arial, Helvetica, sans-serif;
-}
-.swMain ul.anchor li a.selected{
-  color:#F8F8F8;
-  background: #EA8511;  /* EA8511 */
-  border: 1px solid #EA8511;
-  cursor:text;
-  -moz-box-shadow: 5px 5px 8px #888;
-  -webkit-box-shadow: 5px 5px 8px #888;
-  box-shadow: 5px 5px 8px #888;
-}
-.swMain ul.anchor li a.selected:hover {
-  color:#F8F8F8;  
-  background: #EA8511;  
-}
-
-.swMain ul.anchor li a.done { 
-  position:relative;
-  color:#FFF;  
-  background: #8CC63F;  
-  border: 1px solid #8CC63F;   
-  z-index:99;
-}
-.swMain ul.anchor li a.done:hover {
-  color:#5A5655;  
-  background: #8CC63F; 
-  border: 1px solid #5A5655;   
-}
-.swMain ul.anchor li a.disabled {
-  color:#CCCCCC;  
-  background: #F8F8F8;
-  border: 1px solid #CCC;  
-  cursor:text;   
-}
-.swMain ul.anchor li a.disabled:hover {
-  color:#CCCCCC;  
-  background: #F8F8F8;     
-}
-
-.swMain ul.anchor li a.error {
-  color:#6c6c6c !important;  
-  background: #f08f75 !important;
-  border: 1px solid #fb3500 !important;      
-}
-.swMain ul.anchor li a.error:hover {
-  color:#000 !important;       
-}
-
-        </style>
-        
-    </head>
-    
+    <head></head>
     <body>
         <div id="testresultaten">
-        <h3 style="border:1px solid #E0E0E0;padding:5px;font: bold 16px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#E0E0E0;clear:both;text-align:left;-webkit-border-radius: 5px;-moz-border-radius: 5px; width:768px; clear:both;">Jouw ervaring getest voor {{ title }}</h3>
-        <div style="display:block; float:left; margin: 0; padding:5px; border: 1px solid #CCC;font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#F8F8F8; -webkit-border-radius: 5px;-moz-border-radius  : 5px; width:768px; clear:both;">{{ omschrijving }} 
-        </div>    <br /><br />
-        <div style="display:block; float:left; margin-top:10px; padding:5px; border: 1px solid #CCC;font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#F8F8F8; -webkit-border-radius: 5px;-moz-border-radius  : 5px; width:768px; clear:both;">
-           <span style="font: bold 14px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">Jouw ervaring:</span><br /><br />  
+            <div id="header" style="padding: 0px; width: 780px;center top; text-align: left; height: 162px;">
+                <img src="http://media.x2user.eu.s3.amazonaws.com/img/emaillogo.gif" border="0" />
+                
+            </div>
+            <h3 style="border:1px solid #E0E0E0;padding:5px;font: bold 16px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#E0E0E0;clear:both;text-align:left;-webkit-border-radius: 5px;-moz-border-radius: 5px; width:768px; clear:both;">Jouw ervaring getest voor {{ title }}</h3>
+            <div style="display:block; float:left; margin: 0; padding:5px; border: 1px solid #CCC;font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#F8F8F8; -webkit-border-radius: 5px;-moz-border-radius  : 5px; width:768px; clear:both;">
+                {{ omschrijving }}
+            </div>
+            <br />
+            <br />
+            <div style="display:block; float:left; margin-top:10px; padding:5px; border: 1px solid #CCC;font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#F8F8F8; -webkit-border-radius: 5px;-moz-border-radius  : 5px; width:768px; clear:both;">
+                <span style="font: bold 14px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">Jouw ervaring:</span>
+                <br />
+                <br />
                 <span style="margin-top=15px; margin-left: 15px; margin-bottom: 15px; text-align: right">(1=geen, 2=weinig, 3=gemiddeld, 4=meer dan gemiddeld, 5=veel)</span>
-            <table cellspacing="0" style="font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">
-                {% for k in kerntaken %}
-                <tr>
-                    <td colspan="3"><b>{{ k.title }}</b></td>
-                </tr>
-                {% for w in k.werkprocessen %}
-                <tr class="tr-werkproces">
-                    <td width="20"></td>
-                    <td width="500">{{ w.title }}</td>
-                    <td width="200">
-                    <input type="radio" class="werkprocess" name="{{ w.id }}" value="1" {% ifequal w.score '1' %} checked="checked" {% endifequal %} disabled />
-                    1
-                    <input type="radio" class="werkprocess" name="{{w.id}}" value="2" {% ifequal w.score '2' %} checked="checked" {% endifequal %} disabled />
-                    2
-                    <input type="radio"  class="werkprocess"name="{{w.id}}" value="3" {% ifequal w.score '3' %} checked="checked" {% endifequal %} disabled />
-                    3
-                    <input type="radio"  class="werkprocess"name="{{w.id}}" value="4" {% ifequal w.score '4' %} checked="checked" {% endifequal %} disabled />
-                    4
-                    <input type="radio"  class="werkprocess" name="{{w.id}}" value="5" {% ifequal w.score '5' %} checked="checked" {% endifequal %} disabled />
-                    5 </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
+                <table cellspacing="0" style="font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">
+                    {% for k in kerntaken %}
+                    <tr>
+                        <td colspan="3"><b>{{ k.title }}</b></td>
+                    </tr>
+                    {% for w in k.werkprocessen %}
+                    <tr class="tr-werkproces">
+                        <td width="20"></td>
+                        <td width="500">{{ w.title }}</td>
+                        <td width="200">
+                        <input type="radio" class="werkprocess" name="{{ w.id }}" value="1" {% ifequal w.score '1' %} checked="checked" {% endifequal %} disabled />
+                        1
+                        <input type="radio" class="werkprocess" name="{{w.id}}" value="2" {% ifequal w.score '2' %} checked="checked" {% endifequal %} disabled />
+                        2
+                        <input type="radio"  class="werkprocess"name="{{w.id}}" value="3" {% ifequal w.score '3' %} checked="checked" {% endifequal %} disabled />
+                        3
+                        <input type="radio"  class="werkprocess"name="{{w.id}}" value="4" {% ifequal w.score '4' %} checked="checked" {% endifequal %} disabled />
+                        4
+                        <input type="radio"  class="werkprocess" name="{{w.id}}" value="5" {% ifequal w.score '5' %} checked="checked" {% endifequal %} disabled />
+                        5 </td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div style="display:block; float:left; margin-top:10px; padding:5px; border: 1px solid #CCC;font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#F8F8F8; -webkit-border-radius: 5px;-moz-border-radius  : 5px; width:768px; clear:both;">
+                <span style="font: bold 14px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">Jouw toekomst:</span>
+                <br />
+                <br />
+                <table cellspacing="0" style="font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">
+                    <tr class="tr-werkproces">
+                        <td width="20">1.</td>
+                        <td width="500">Ik wil graag een ervaringscertficaat (EVC procedure volgen)</td>
+                        <td width="200">
+                        <input type="radio" name="evc" value="1" {% ifequal evc '1' %} checked="checked" {% endifequal %} disabled />
+                        Ja
+                        <input type="radio" name="evc" value="0" {% ifequal evc '0' %} checked="checked" {% endifequal %} disabled />
+                        Nee
+                    </tr>
+                    <tr class="tr-werkproces">
+                        <td width="20">2.</td>
+                        <td width="500">Ik wil graag een <span id="#ervaringsprofiel">ervaringsprofiel </span>(EVP procedure volgen) </td>
+                        <td width="200">
+                        <input type="radio" name="evp" value="1" {% ifequal evp '1' %} checked="checked" {% endifequal %} disabled />
+                        Ja
+                        <input type="radio" name="evp" value="0" {% ifequal evp '0' %} checked="checked" {% endifequal %} disabled />
+                        Nee
+                    </tr>
+                    <tr class="tr-werkproces">
+                        <td width="20">3.</td>
+                        <td width="500">Ik wil graag hulp van een loopbaancoach</td>
+                        <td width="200">
+                        <input type="radio" name="loopbaancoach" value="1" {% ifequal coach '1' %} checked="checked" {% endifequal %} disabled />
+                        Ja
+                        <input type="radio" name="loopbaancoach" value="0" {% ifequal coach '0' %} checked="checked" {% endifequal %} disabled />
+                        Nee
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                        <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><b>Jouw motivatie:</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">{{ motivatie }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        
-        <div style="display:block; float:left; margin-top:10px; padding:5px; border: 1px solid #CCC;font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;background-color:#F8F8F8; -webkit-border-radius: 5px;-moz-border-radius  : 5px; width:768px; clear:both;">
-           <span style="font: bold 14px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">Jouw toekomst:</span><br /><br />  
- 
-            <table cellspacing="0" style="font: normal 12px Verdana, Arial, Helvetica, sans-serif; color:#5A5655;">
-
-                <tr class="tr-werkproces">
-                    <td width="20">1.</td>
-                    <td width="500">Ik wil graag een ervaringscertficaat (EVC procedure volgen)</td>
-                    <td width="200">
-                    <input type="radio" name="evc" value="1" {% ifequal evc '1' %} checked="checked" {% endifequal %} disabled />
-                    Ja
-                    <input type="radio" name="evc" value="0" {% ifequal evc '0' %} checked="checked" {% endifequal %} disabled />
-                    Nee
-                    
-                </tr>
-                <tr class="tr-werkproces">
-                    <td width="20">2.</td>
-                    <td width="500">Ik wil graag een <span id="#ervaringsprofiel">ervaringsprofiel </span>(EVP procedure volgen)
-             </td>
-                    <td width="200">
-                    <input type="radio" name="evp" value="1" {% ifequal evp '1' %} checked="checked" {% endifequal %} disabled />
-                    Ja
-                    <input type="radio" name="evp" value="0" {% ifequal evp '0' %} checked="checked" {% endifequal %} disabled />
-                    Nee
-                    
-                </tr>
-                <tr class="tr-werkproces">
-                    <td width="20">3.</td>
-                    <td width="500">Ik wil graag hulp van een loopbaancoach</td>
-                    <td width="200">
-                    <input type="radio" name="loopbaancoach" value="1" {% ifequal coach '1' %} checked="checked" {% endifequal %} disabled />
-                    Ja
-                    <input type="radio" name="loopbaancoach" value="0" {% ifequal coach '0' %} checked="checked" {% endifequal %} disabled />
-                    Nee
-                    
-                </tr>
-                <tr>
-                    <td colspan="3"><br /></td>
-                    
-                </tr>
-                <tr>
-                    <td colspan="3"><b>Jouw motivatie:</b></td>
-                    
-                </tr>
-                <tr>
-                    <td colspan="3">{{ motivatie }}</td>
-                    
-                </tr>
-                
-                
-            </table>
-            
+        <div style="display:block; text-align:center; margin-top:10px; padding:5px; font: normal 14px Verdana, Arial, Helvetica, sans-serif; color:#5A5655; clear:both; width:780px">
+            <a href="http://www.rapasso.nl" style="text-decoration:none"><span style="font-size: 16x; font-family: Lucida Sans Unicode, sans-serif; font-style: italic; color: #f4a726;">De test is mogelijk gemaakt door Rapasso. Begeleid personen van A naar B!</span></a>
         </div>
-        
-        </div>
-        <br /><br />
+        <br />
+        <br />
     </body>
-    
 </html>

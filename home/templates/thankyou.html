@@ -1,0 +1,23 @@
+
+
+
+        
+        <div id="thankyou">
+            
+            Beste {{ first_name}},<br /><br />
+            
+            Bedankt voor deelname aan de ervaringstest voor:<br /><br />
+            
+             {{ title }}
+            <br /><br />
+            De testresultaten worden gestuurd naar {{ email }}
+            
+            <br /><br />
+            
+        </div>
+        
+        <div id="naar-rapasso">
+            Deze test wordt mogelijk gemaakt via <a href="http://www.rapasso.nl">Rapasso</a>. Begeleid personen van A naar B! 
+        </div>
+        
+        {% csrf_token %}

@@ -22,6 +22,18 @@ class Home(TemplateView):
     
 class Wizard(TemplateView):
     template_name = 'wizard.html'
+    
+class ThankYou(View):
+    def get(self, request):
+        print 'thank you view'
+        test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
+        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name(), "participant":test.participant()}
+        return render(request, 'thankyou.html', c)
+    def post(self, request):
+        print 'thank you view'
+        test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
+        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name(), "participant":test.participant()}
+        return render(request, 'thankyou.html', c)
 
 
 class Step(View):
@@ -208,12 +220,12 @@ class SubmitTest(View):
             ktaakdict['werkprocessen'] = wplist 
             ktaaklist.append(ktaakdict)
 
-        c = Context({"title":test.name(), "omschrijving":test.omschrijving(), "kerntaken": ktaaklist, "evp": test.evp, "evc": test.evc, "coach": test.coach, "motivatie": test.motivatie })
+        c = Context({"title":test.name(), "participant":test.participant() ,"omschrijving":test.omschrijving(), "kerntaken": ktaaklist, "evp": test.evp, "evc": test.evc, "coach": test.coach, "motivatie": test.motivatie })
         text_body = textt.render(c)
         html_body = htmlt.render(c)
         recipients = [test.email, 'info@rapasso.nl']
         #recipients = ['henk@x2user.com']
-        subject = "Jouw ervaring getest voor: " + test.name()
+        subject = "Ervaring van " + test.first_name.upper() + " getest voor: " + test.name()
         email = EmailMultiAlternatives(subject, text_body, 'test@testmijnervaring.nl', recipients)
         email.attach_alternative(html_body, "text/html")
         email.send()
