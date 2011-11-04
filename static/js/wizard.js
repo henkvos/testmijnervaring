@@ -1,51 +1,11 @@
 $(document).ready(function() {
-	$("#startwizard").click(function() {
-				$("#app").load('/startwizard', null, function() {
-							// Smart Wizard
-							// $('#wizard').smartWizard();
-							$('#wizard').smartWizard({
-										contentURL : '/wizard',
-										// transitionEffect:'slideleft',
-										contentCache : false,
-										onLeaveStep : serForm,
-										onFinish : submitTest
-
-									});
-
-						});
-				function serForm() {
-					if (self.stepNum == 3) {
-
-						wplist = $('#testwerkprocessen').serializeArray();
-						$.post('/processtest', wplist);
-
-						return true;
-						
-					} else if (self.stepNum == 4) {
-						
-						toekomst = $('#stap3_toekomst').serializeArray();
-						$.post('/processtoekomst', toekomst);
-						
-                        return true;
-						
-					} else {
-						return true;
-					}
-
-				};
-				function submitTest() {
-					naw = $('#stap4_aanvraag').serializeArray();
-					$.post('/submittest', naw);
-					//$("#app").load('/thankyou');
-					$.post('/thankyou', function(data){
-						$('#app').html(data);
-					});
-					//$('#app').empty();
-                    //$("<div/>").html(html).prependTo("#app");
-					
-					
-				};
+	$(".starttest").click(function() {
+				runWizard();
 			});
+	$("#startwizard").click(function() {
+				runWizard();
+			});
+
 	// send crsf token for django's csrf protection
 	$("body").bind("ajaxSend", function(elm, xhr, s) {
 				if (s.type == "POST") {
@@ -54,14 +14,129 @@ $(document).ready(function() {
 			});
 });
 
-/*
- * $('form').submit(function() { alert($(this).serialize()); return false; });
- * 
- * 
- */
+function runWizard() {
+	$("#app").load('/startwizard', null, function() {
+
+				$('#wizard').smartWizard({
+							contentURL : '/wizard',
+							// transitionEffect:'slideleft',
+							contentCache : false,
+							onLeaveStep : serForm,
+							onFinish : submitTest
+
+						});
+
+			});
+	function serForm() {
+		if (self.stepNum == 2) {
+			id = $("#uitstroom_id").val();
+			if (!id) {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 1,
+							iserror : true
+						});
+				$('#wizard')
+						.smartWizard('showMessage', 'Kies eerst een beroep');
+				$("#beroep-div").addClass("ui-state-error ui-corner-all");
+				return false;
+				// return true;
+			} else {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 1,
+							iserror : false
+						});
+				$('#wizard').smartWizard('hideMessage');
+
+				return true;
+			}
+
+		} else if (self.stepNum == 3) {
+
+			wps = $('.td-werkproces');
+			wplist = $('#testwerkprocessen').serializeArray();
+			if (wps.length !== wplist.length) {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 2,
+							iserror : true
+						});
+				$('#wizard').smartWizard('showMessage',
+						'Vul de lijst volledig in');
+				return false;
+				//return true;
+			} else {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 2,
+							iserror : false
+						});
+				$('#wizard').smartWizard('hideMessage');
+				$.post('/processtest', wplist);
+
+				return true;
+			}
+
+		} else if (self.stepNum == 4) {
+			radios = $('.td-choice');
+			toekomst = $('#stap3_toekomst').serializeArray();
+
+			if (radios.length !== (toekomst.length - 1)) {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 3,
+							iserror : true
+						});
+				$('#wizard').smartWizard('showMessage',
+						'Vul de lijst volledig in');
+				return false;
+				//return true;
+			} else {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 3,
+							iserror : false
+						});
+				$('#wizard').smartWizard('hideMessage');
+				$.post('/processtoekomst', toekomst);
+				return true;
+			}
+
+		} else {
+			return true;
+		}
+
+	};
+	function submitTest() {
+		jQuery.validator.setDefaults({
+					// errorClass: "ui-state-error ui-corner-all"
+					errorElement : ""
+				});
+		$("#stap4_aanvraag").validate();
+
+		if ($("#stap4_aanvraag").valid()) {
+			$('#wizard').smartWizard('hideMessage');
+			$('#wizard').smartWizard('setError', {
+                        stepnum : 4,
+                        iserror : false
+                    });
+			naw = $('#stap4_aanvraag').serializeArray();
+			$.post('/submittest', naw);
+			$('#header-phrase').empty();
+			$.post('/thankyou', function(data) {
+						$('#app').html(data);
+					});
+		} else {
+			$('#wizard').smartWizard('setError', {
+						stepnum : 4,
+						iserror : true
+					});
+			$('#wizard')
+					.smartWizard('showMessage',
+							'Vul de verplichte velden in alvorens je de aanvraag verzend');
+			return false;
+		}
+
+	};
+
+}
 
 // The following code will serialize for use with JSON:
-
 (function($) {
 	$.fn.serializeJSON = function() {
 		var json = {};

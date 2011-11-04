@@ -176,8 +176,8 @@
 }
 
 .swMain ul.anchor li a.error {
-  color:#6c6c6c !important;  
-  background: #f08f75 !important;
+  color:#ff0000 !important;  
+  background: #ffcccc !important;
   border: 1px solid #fb3500 !important;      
 }
 .swMain ul.anchor li a.error:hover {
@@ -272,14 +272,14 @@
   float:left;
   margin: 4px 0 0 5px;
   padding:5px;
-  border: 1px solid #FFD700; 
-  background-color: #FFFFDD;  
-  font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
-  color:#5A5655;         
+  border: 1px solid #ff0000; 
+  background-color: #ffcccc;  
+  font: bold 12px Verdana, Arial, Helvetica, sans-serif; 
+  color:#ff0000;         
   -moz-border-radius  : 5px;
   -webkit-border-radius: 5px;
   z-index:999;
-  min-width:200px;  
+  min-width:300px;  
 }
 .swMain .msgBox .content {
   font: normal 12px Verdana,Arial,Helvetica,sans-serif;
@@ -287,9 +287,9 @@
   float:left;
 }
 .swMain .msgBox .close {
-  border: 1px solid #CCC;
+  border: 1px solid #ff0000;
   border-radius: 3px;
-  color: #CCC;
+  color: #ff0000;
   display: block;
   float: right;
   margin: 0 0 0 5px;

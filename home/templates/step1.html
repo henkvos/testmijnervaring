@@ -44,20 +44,46 @@
                             $("#log").scrollTop(0);
                             $("#omschrijving").fadeIn("slow");
                             uitstroomid = ui.item.id;
-                            $.post("/storeselection", { uitstroom_nr: uitstroomid } );
-                            setCookie('uitstroom_nr',uitstroomid,'1');
+                            $("#uitstroom_id").val(uitstroomid);
+                            $.post("/storeselection", {
+                                uitstroom_nr : uitstroomid
+                            });
+                            $("#beroep-div").removeClass("ui-state-error ui-corner-all");
+                            $('#wizard').smartWizard('setError',{stepnum:1,iserror:false});
+                            $('#wizard').smartWizard('setError',{stepnum:2,iserror:false});
+                            $('#wizard').smartWizard('hideMessage');
+                            //setCookie('uitstroom_nr', uitstroomid, '1');
                         }
                     });
+                },
+                change : function(event, ui) {
+                    if(!ui.item) {
+                        return false;
+                    }
+                },
+                onblur : function(event, ui) {
+                    if(!ui.item.id) {
+                        alert('geen keuze gemaakt')
+                        return false;
+                    }
+                },
+                testval : function(event, ui) {
+                    alert(ui.item.id)
                 }
             });
         });
 
     </script>
     <div class="ui-widget" style="margin-left:10px; margin-top: 20px">
-        <label for="beroep">Beroep: </label>
-        <input id="beroep" style="width:350px" />
+        
+        <div id="beroep-div" style="padding:5px; width=465px">
+            <label for="beroep">Beroep: </label>
+            <input id="beroep" style="width:350px; display:inline-block" />
+     
+            <input type="hidden" name="uitstroom_id" id="uitstroom_id" />
+        </div>
     </div>
 </div>
-<div id="omschrijving" class="ui-widget" style="margin-left:10px; margin-top: 20px; font-family:Arial; display:none;">
+<div id="omschrijving" class="ui-widget" style="margin-left:10px; margin-top: 10px; font-family:Arial; display:none;">
     Omschrijving <div id="log" style="height: 170px; width: 735px; overflow: auto; padding: 5px" class="ui-widget-content"></div>
 </div>

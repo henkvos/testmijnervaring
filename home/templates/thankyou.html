@@ -6,18 +6,38 @@
             
             Beste {{ first_name}},<br /><br />
             
-            Bedankt voor deelname aan de ervaringstest voor:<br /><br />
+            Hartelijk dank voor jouw deelname aan deze ervaringstest.<br />
             
-             {{ title }}
-            <br /><br />
-            De testresultaten worden gestuurd naar {{ email }}
+
+            Een kopie van jouw testresultaten wordt verstuurd naar: <br />
+            <span id="email">{{ email }}</span>
             
-            <br /><br />
             
         </div>
         
-        <div id="naar-rapasso">
-            Deze test wordt mogelijk gemaakt via <a href="http://www.rapasso.nl">Rapasso</a>. Begeleid personen van A naar B! 
+        <div id="binnenkort">
+            
+            <table border="0">
+                <tbody><tr>
+                    <td colspan="2" align="center">
+                        Binnenkort ook beschikbaar
+                        <br /><br />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="250">
+                        <img src="/static/img/AppMijnOntwikkelplan.jpg" /><br />
+                         <div style="color:#555555;margin-top: 10px">mijn ontwikkelplan</div>
+                    </td>
+                    <td align="center" width="250">
+                        <img src="/static/img/AppMijnPortfolio.jpg" /><br />
+                         <div style="color:#555555;margin-top: 10px">match mijn portfolio</div>
+                    </td>
+                    
+                </tr>
+            </tbody></table>
+            
+
         </div>
         
         {% csrf_token %}

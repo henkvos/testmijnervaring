@@ -7,6 +7,7 @@ from django.utils.html import strip_tags
 class KBB(models.Model): #kenniscentrum
     nr = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
     tenant = models.IntegerField(default=0,blank=True, null=True)
     
     def __unicode__(self):
@@ -229,19 +230,20 @@ class Uitstroom_Ervaringstest(models.Model):
     uuid = models.CharField(primary_key=True, max_length=36)
     session_key = models.CharField(max_length=32)
     uitstroom = models.ForeignKey(Uitstroom, related_name='ervaringstesten')
+    kbb_nr = models.IntegerField(blank=True, null=True, default=0)
     remote_ip = models.IPAddressField(blank=True, null=True)
     remote_host = models.CharField(max_length=255, null=True, blank=True)
     referer = models.URLField(max_length=255, null=True, blank=True)
     user_agent = models.CharField(max_length=255, null=True, blank=True)
-    first_name = models.CharField(max_length=32, null=True, blank=True)
-    last_name = models.CharField(max_length=64, null=True, blank=True)
-    email = models.EmailField(max_length=120, null=True, blank=True)
-    zipcode = models.CharField(max_length=16, null=True, blank=True)
-    phone = models.CharField(max_length=32, null=True, blank=True)
+    first_name = models.CharField(max_length=32, null=True, blank=True, default='')
+    last_name = models.CharField(max_length=64, null=True, blank=True, default='')
+    email = models.EmailField(max_length=120, null=True, blank=True, default='')
+    zipcode = models.CharField(max_length=16, null=True, blank=True, default='')
+    phone = models.CharField(max_length=32, null=True, blank=True, default='')
     evp = models.CharField(max_length=2, choices=choices, blank=True, null=True)
     evc = models.CharField(max_length=2, choices=choices, blank=True, null=True)
     coach = models.CharField(max_length=2, choices=choices, blank=True, null=True)
-    motivatie = models.TextField(null=True, blank=True)
+    motivatie = models.TextField(null=True, blank=True, default='')
     
     
     def __unicode__(self):
@@ -249,10 +251,10 @@ class Uitstroom_Ervaringstest(models.Model):
     
     def name(self):
         return  str(self.uitstroom.title)
-    
+    '''
     def participant(self):
         return  self.first_name + " " + self.last_name
-    
+    '''
     def omschrijving(self):
         return strip_tags(self.uitstroom.contextvandeuitstroom)
     

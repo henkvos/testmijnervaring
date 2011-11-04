@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.template.loader import render_to_string, get_template
 from django.utils.html import strip_tags
 
-from evc.models import Uitstroom, Uitstroom_Kerntaak, Uitstroom_Werkproces, Uitstroom_Ervaringstest, Uitstroom_ErvaringstestWerkproces
+from evc.models import Uitstroom, Uitstroom_Kerntaak, Uitstroom_Werkproces, Uitstroom_Ervaringstest, Uitstroom_ErvaringstestWerkproces, KBB
 try: import simplejson as json
 except ImportError: import json
 
@@ -25,14 +25,11 @@ class Wizard(TemplateView):
     
 class ThankYou(View):
     def get(self, request):
-        print 'thank you view'
-        test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
-        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name(), "participant":test.participant()}
-        return render(request, 'thankyou.html', c)
+        return HttpResponseForbidden
+    
     def post(self, request):
-        print 'thank you view'
         test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
-        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name(), "participant":test.participant()}
+        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name()}
         return render(request, 'thankyou.html', c)
 
 
@@ -102,7 +99,9 @@ class Step(View):
             elif nr == '4':
                 try:
                     test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
-                    c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "zipcode": test.zipcode, "phone": test.phone}
+                    logo_path = "/static/img/kenniscentra/" + str(test.kbb_nr) + ".gif"
+                    kbb = KBB.objects.get(pk=test.kbb_nr)
+                    c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "zipcode": test.zipcode, "phone": test.phone, "logo":logo_path, "name":test.name(),"kbb":kbb.name,  "description":kbb.description}
                 except Uitstroom_Ervaringstest.DoesNotExist:
                     test = None
                     c = {"first_name": "", "last_name": "", "email": "", "zipcode": "", "phone": ""}
@@ -137,11 +136,16 @@ class ProcessTest(View):
         #cgi = request.META
         uitstroom_nr = request.session['uitstroom_nr']
         uitstroom = Uitstroom.objects.get(pk=uitstroom_nr)
+        kenniscentra = uitstroom.deelb.dossier.kenniscentra.all()
+        print kenniscentra[0].nr
+        for kbb in kenniscentra:
+            print kbb.nr
+        
         test, created = Uitstroom_Ervaringstest.objects.get_or_create(
                                                                       pk=request.session['test_id'], 
                                                                       uitstroom=uitstroom, 
                                                                       session_key=request.session.session_key,
-                                                                      
+                                                                      kbb_nr=kenniscentra[0].nr
                                                                       )
 
         test.save()
@@ -220,7 +224,7 @@ class SubmitTest(View):
             ktaakdict['werkprocessen'] = wplist 
             ktaaklist.append(ktaakdict)
 
-        c = Context({"title":test.name(), "participant":test.participant() ,"omschrijving":test.omschrijving(), "kerntaken": ktaaklist, "evp": test.evp, "evc": test.evc, "coach": test.coach, "motivatie": test.motivatie })
+        c = Context({"title":test.name() ,"omschrijving":test.omschrijving(), "kerntaken": ktaaklist, "evp": test.evp, "evc": test.evc, "coach": test.coach, "motivatie": test.motivatie })
         text_body = textt.render(c)
         html_body = htmlt.render(c)
         recipients = [test.email, 'info@rapasso.nl']

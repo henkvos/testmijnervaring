@@ -35,6 +35,11 @@ table td, table th {
     height: 600px;
     display: inline-block;
 }
+
+#app {
+    margin-bottom:10px;
+}
+
 #wizard {
     margin-left: 200px;
     margin-top: 30px;
@@ -42,6 +47,14 @@ table td, table th {
 
 .ui-autocomplete-loading {
                     background: white url('/static/img/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+em { font-weight: bold; padding-right: 1em; vertical-align: top; color:#FFA500 }
+label { width: 6.1em; float: left; }
+label.error { float: none; color:red; vertical-align: top; }
+
+input.error {
+    border: 2px solid red;
 }
 
 
@@ -54,6 +67,17 @@ table td, table th {
     margin-top: 80px;
     padding: 0px;
 }
+
+#footer {
+    font-size: 9px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    color: #888888;
+    margin-left: 265px;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
 #header-phrase {
     font-size: 22px;
     font-family: "Lucida Sans Unicode", sans-serif;
@@ -64,22 +88,38 @@ table td, table th {
     padding: 0px;
 }
 #icons {
-    margin-top: 100px;
+    margin-top: 70px;
     margin-left: 245px;
     vertical-align: top;
     text-align: center;
 }
 
+#kbb-description {
+    font-size: 11px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    color: #666666;
+    margin-top: 20px;
+
+}
+
 #thankyou {
     margin-top: 100px;
     margin-left: 245px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
     vertical-align: top;
     text-align: left;
     font-size: 16px;
     font-family: "Lucida Sans Unicode", sans-serif;
-    font-style: italic;
     color: #888888;
+    
+}
+
+#email {
+    vertical-align: top;
+    text-align: left;
+    font-size: 16px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    color: #ffa500;
     
 }
 
@@ -118,12 +158,33 @@ table td, table th {
     color: #888888;
 }
 #aankondiging {
-    font-size: 20px;
+    font-size: 40px;
     font-family: "Lucida Sans Unicode", sans-serif;
     font-style: italic;
     color: #ffa500;
-    margin-left: 425px;
-    margin-top: 60px;
+    margin-left: 505px;
+    margin-top: 30px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#binnenkort {
+    font-size: 16px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    color: #ffa500;
+    margin-left: 350px;
+    margin-top: 0px;
+
+}
+
+.starttest {
+    font-size: 16px;
+    font-family: "Lucida Sans Unicode", sans-serif;
+    font-style: italic;
+    color: #ffa500;
+    text-decoration: underline;
+    margin-top: 10px;
+    cursor: pointer;
 }
 #naar-rapasso {
     font-size: 16px;
@@ -131,7 +192,7 @@ table td, table th {
     font-style: italic;
     color: #888888;
     margin-left: 305px;
-    margin-top: 20px;
+    margin-top: 60px;
     vertical-align: top;
 }
 a {

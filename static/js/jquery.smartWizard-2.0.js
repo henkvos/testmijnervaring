@@ -44,6 +44,11 @@
                   var ar =  Array.prototype.slice.call( args, 1 );
                   showMessage(ar[0]);
                   return true;
+                }else if (action === 'hideMessage') {
+                  //showMessage(Array.prototype.slice.call( args, 1 ));
+                  //var ar =  Array.prototype.slice.call( args, 1 );
+                  hideMessage();
+                  return true;
                 }else if (action === 'setError') {
                   var ar =  Array.prototype.slice.call( args, 1 );
                   setError(ar[0].stepnum,ar[0].iserror);
@@ -301,6 +306,11 @@
                 function showMessage(msg){
                   $('.content',msgBox).html(msg);
               		msgBox.show();
+                }
+                
+                function hideMessage(){
+                  $('.content',msgBox).html('');
+                    msgBox.hide();
                 }
                 
                 function setError(stepnum,iserror){
