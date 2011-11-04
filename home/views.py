@@ -89,10 +89,10 @@ class Step(View):
             elif nr == '3':
                 try:
                     test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
-                    c = {"evp": test.evp, "evc": test.evc, "coach": test.coach, "motivatie": test.motivatie}
+                    c = {"evp": test.evp, "evc": test.evc, "coach": test.coach, "collega":test.collega, "motivatie": test.motivatie}
                 except Uitstroom_Ervaringstest.DoesNotExist:
                     test = None
-                    c = {"evp": "", "evc": "", "coach": "", "motivatie": ""}
+                    c = {"evp": "", "evc": "", "coach": "", "motivatie": "", "collega":""}
 
                 return render(request, template, c)
             
@@ -170,6 +170,7 @@ class  ProcessStep3(View):
         test.evp = data.get('evp', test.evp)
         test.evc = data.get('evc', test.evc)
         test.coach = data.get('loopbaancoach', test.coach)
+        test.collega = data.get('collega', test.collega)
         test.motivatie = data.get('motivatie', test.motivatie)
         test.save()
         return HttpResponse("OK")
@@ -224,13 +225,13 @@ class SubmitTest(View):
             ktaakdict['werkprocessen'] = wplist 
             ktaaklist.append(ktaakdict)
 
-        c = Context({"title":test.name() ,"omschrijving":test.omschrijving(), "kerntaken": ktaaklist, "evp": test.evp, "evc": test.evc, "coach": test.coach, "motivatie": test.motivatie })
+        c = Context({"title":test.name() ,"omschrijving":test.omschrijving(), "kerntaken": ktaaklist, "evp": test.evp, "evc": test.evc, "coach": test.coach, "collega":test.collega, "motivatie": test.motivatie })
         text_body = textt.render(c)
         html_body = htmlt.render(c)
         recipients = [test.email, 'info@rapasso.nl']
         #recipients = ['henk@x2user.com']
         subject = "Ervaring van " + test.first_name.upper() + " getest voor: " + test.name()
-        email = EmailMultiAlternatives(subject, text_body, 'test@testmijnervaring.nl', recipients)
+        email = EmailMultiAlternatives(subject, text_body, 'ervaringstest@testmijnervaring.nl', recipients)
         email.attach_alternative(html_body, "text/html")
         email.send()
         

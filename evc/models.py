@@ -243,6 +243,7 @@ class Uitstroom_Ervaringstest(models.Model):
     evp = models.CharField(max_length=2, choices=choices, blank=True, null=True)
     evc = models.CharField(max_length=2, choices=choices, blank=True, null=True)
     coach = models.CharField(max_length=2, choices=choices, blank=True, null=True)
+    collega = models.CharField(max_length=2, choices=choices, blank=True, null=True)
     motivatie = models.TextField(null=True, blank=True, default='')
     
     
