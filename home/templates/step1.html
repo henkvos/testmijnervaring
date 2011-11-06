@@ -49,6 +49,7 @@
                                 uitstroom_nr : uitstroomid
                             });
                             $("#beroep-div").removeClass("ui-state-error ui-corner-all");
+                            $("#beroep").removeClass("error");
                             $('#wizard').smartWizard('setError',{stepnum:1,iserror:false});
                             $('#wizard').smartWizard('setError',{stepnum:2,iserror:false});
                             $('#wizard').smartWizard('hideMessage');
@@ -78,7 +79,7 @@
         
         <div id="beroep-div" style="padding:5px; width=465px">
             <label for="beroep">Beroep: </label>
-            <input id="beroep" style="width:350px; display:inline-block" />
+            <input id="beroep" style="width:350px; display:inline-block" placeholder="Start met typen om een beroep te selecteren" />
      
             <input type="hidden" name="uitstroom_id" id="uitstroom_id" />
         </div>

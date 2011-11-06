@@ -16,15 +16,15 @@
                     <td width="20"></td>
                     <td width="500">{{ w.title }}</td>
                     <td width="200" class="td-werkproces">
-                    <input type="radio" class="werkprocess" name="{{ w.id }}" value="1" {% ifequal w.score '1' %} checked="checked" {% endifequal %} />
+                    <input type="radio" name="{{ w.id }}" value="1" {% ifequal w.score '1' %} checked="checked" {% endifequal %} class="required" title=" !" />
                     1
-                    <input type="radio" class="werkprocess" name="{{w.id}}" value="2" {% ifequal w.score '2' %} checked="checked" {% endifequal %} />
+                    <input type="radio" name="{{w.id}}" value="2" {% ifequal w.score '2' %} checked="checked" {% endifequal %} />
                     2
-                    <input type="radio"  class="werkprocess"name="{{w.id}}" value="3" {% ifequal w.score '3' %} checked="checked" {% endifequal %} />
+                    <input type="radio" name="{{w.id}}" value="3" {% ifequal w.score '3' %} checked="checked" {% endifequal %} />
                     3
-                    <input type="radio"  class="werkprocess"name="{{w.id}}" value="4" {% ifequal w.score '4' %} checked="checked" {% endifequal %} />
+                    <input type="radio" name="{{w.id}}" value="4" {% ifequal w.score '4' %} checked="checked" {% endifequal %} />
                     4
-                    <input type="radio"  class="werkprocess" name="{{w.id}}" value="5" {% ifequal w.score '5' %} checked="checked" {% endifequal %} />
+                    <input type="radio" name="{{w.id}}" value="5" {% ifequal w.score '5' %} checked="checked" {% endifequal %}  />
                     5 </td>
                 </tr>
                 {% endfor %}

@@ -2,9 +2,6 @@ $(document).ready(function() {
 	$(".starttest").click(function() {
 				runWizard();
 			});
-	$("#startwizard").click(function() {
-				runWizard();
-			});
 
 	// send crsf token for django's csrf protection
 	$("body").bind("ajaxSend", function(elm, xhr, s) {
@@ -35,9 +32,8 @@ function runWizard() {
 							stepnum : 1,
 							iserror : true
 						});
-				$('#wizard')
-						.smartWizard('showMessage', 'Kies eerst een beroep');
-				$("#beroep-div").addClass("ui-state-error ui-corner-all");
+				$('#wizard').smartWizard('showMessage', 'Kies eerst een beroep');
+				$("#beroep").addClass("error");
 				return false;
 				// return true;
 			} else {
@@ -52,9 +48,45 @@ function runWizard() {
 
 		} else if (self.stepNum == 3) {
 
-			wps = $('.td-werkproces');
-			wplist = $('#testwerkprocessen').serializeArray();
-			if (wps.length !== wplist.length) {
+			var wpForm = $("#testwerkprocessen").validate({
+				errorPlacement : function(error, element) {
+					error.appendTo(element.parent().next());
+				},
+				success : function() {
+					nrInvalid = wpForm.numberOfInvalids();
+					if (nrInvalid == 0) {
+						$('#wizard').smartWizard('hideMessage');
+						$('#wizard').smartWizard('setError', {
+									stepnum : 2,
+									iserror : false
+								});
+						return true;
+					} else {
+						$('#wizard').smartWizard('setError', {
+									stepnum : 2,
+									iserror : true
+								});
+						$('#wizard').smartWizard('showMessage',
+								'Vul de lijst volledig in');
+						return false;
+					}
+
+				}
+
+			});
+
+			if ($("#testwerkprocessen").valid()) {
+				$('#wizard').smartWizard('hideMessage');
+				$('#wizard').smartWizard('setError', {
+							stepnum : 2,
+							iserror : false
+						});
+				wplist = $('#testwerkprocessen').serializeArray();
+				$.post('/processtest', wplist);
+				return true;
+
+				//
+			} else {
 				$('#wizard').smartWizard('setError', {
 							stepnum : 2,
 							iserror : true
@@ -62,23 +94,46 @@ function runWizard() {
 				$('#wizard').smartWizard('showMessage',
 						'Vul de lijst volledig in');
 				return false;
-				//return true;
-			} else {
-				$('#wizard').smartWizard('setError', {
-							stepnum : 2,
-							iserror : false
-						});
-				$('#wizard').smartWizard('hideMessage');
-				$.post('/processtest', wplist);
-
-				return true;
 			}
 
 		} else if (self.stepNum == 4) {
-			radios = $('.td-choice');
-			toekomst = $('#stap3_toekomst').serializeArray();
+			var st3Form = $("#stap3_toekomst").validate({
+				errorPlacement : function(error, element) {
+					error.appendTo(element.parent().next());
+				},
+				success : function() {
+					nrInvalid = st3Form.numberOfInvalids();
+					if (nrInvalid == 0) {
+						$('#wizard').smartWizard('hideMessage');
+						$('#wizard').smartWizard('setError', {
+									stepnum : 3,
+									iserror : false
+								});
+						return true;
+					} else {
+						$('#wizard').smartWizard('setError', {
+									stepnum : 3,
+									iserror : true
+								});
+						$('#wizard').smartWizard('showMessage',
+								'Vul de lijst volledig in');
+						return false;
+					}
 
-			if (radios.length !== (toekomst.length - 1)) {
+				}
+
+			});
+
+			if ($("#stap3_toekomst").valid()) {
+				$('#wizard').smartWizard('setError', {
+							stepnum : 3,
+							iserror : false
+						});
+				$('#wizard').smartWizard('hideMessage');
+				toekomst = $('#stap3_toekomst').serializeArray();
+				$.post('/processtoekomst', toekomst);
+				return true;
+			} else {
 				$('#wizard').smartWizard('setError', {
 							stepnum : 3,
 							iserror : true
@@ -86,15 +141,7 @@ function runWizard() {
 				$('#wizard').smartWizard('showMessage',
 						'Vul de lijst volledig in');
 				return false;
-				//return true;
-			} else {
-				$('#wizard').smartWizard('setError', {
-							stepnum : 3,
-							iserror : false
-						});
-				$('#wizard').smartWizard('hideMessage');
-				$.post('/processtoekomst', toekomst);
-				return true;
+
 			}
 
 		} else {
@@ -104,23 +151,48 @@ function runWizard() {
 	};
 	function submitTest() {
 		jQuery.validator.setDefaults({
-					// errorClass: "ui-state-error ui-corner-all"
-					errorElement : ""
+				// errorClass: "ui-state-error ui-corner-all"
+				// errorElement : ""
 				});
-		$("#stap4_aanvraag").validate();
+		var submitForm = $("#stap4_aanvraag").validate({
+			success : function() {
+				nrInvalid = submitForm.numberOfInvalids();
+				if (nrInvalid == 0) {
+					$('#wizard').smartWizard('hideMessage');
+					$('#wizard').smartWizard('setError', {
+								stepnum : 4,
+								iserror : false
+							});
+					return true;
+				} else {
+					$('#wizard').smartWizard('setError', {
+								stepnum : 4,
+								iserror : true
+							});
+					$('#wizard')
+							.smartWizard('showMessage',
+									'Vul de verplichte velden in alvorens de aanvraag te verzenden');
+					return false;
+				}
+			}
+
+		});
 
 		if ($("#stap4_aanvraag").valid()) {
 			$('#wizard').smartWizard('hideMessage');
 			$('#wizard').smartWizard('setError', {
-                        stepnum : 4,
-                        iserror : false
-                    });
-			naw = $('#stap4_aanvraag').serializeArray();
-			$.post('/submittest', naw);
-			$('#header-phrase').empty();
-			$.post('/thankyou', function(data) {
-						$('#app').html(data);
+						stepnum : 4,
+						iserror : false
 					});
+			naw = $('#stap4_aanvraag').serializeArray();
+			$.post('/submittest', naw, function() {
+						$('#header-phrase').empty();
+						$.post('/thankyou', function(data) {
+									$('#app').html(data);
+								});
+					});
+
+			//
 		} else {
 			$('#wizard').smartWizard('setError', {
 						stepnum : 4,
@@ -133,7 +205,6 @@ function runWizard() {
 		}
 
 	};
-
 }
 
 // The following code will serialize for use with JSON:

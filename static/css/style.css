@@ -51,10 +51,21 @@ table td, table th {
 
 em { font-weight: bold; padding-right: 1em; vertical-align: top; color:#FFA500 }
 label { width: 6.1em; float: left; }
-label.error { float: none; color:red; vertical-align: top; }
+label.error { float: none; color:red; font-weight: bold; padding-left: 5px; font-size: 16px; }
 
 input.error {
     border: 2px solid red;
+}
+select.error {
+    border: 2px solid red;
+}
+radio.error {
+    border: 1px dotted red;
+}
+
+
+style {
+    font-weight: bold; padding-left: 5px; color: red;
 }
 
 

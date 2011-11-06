@@ -1,5 +1,5 @@
-from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
 #from coffin.shortcuts import render_to_response
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
@@ -8,6 +8,8 @@ from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 from django.template.loader import render_to_string, get_template
 from django.utils.html import strip_tags
+from django.core import signals
+from home.signals import send_test_results
 
 from evc.models import Uitstroom, Uitstroom_Kerntaak, Uitstroom_Werkproces, Uitstroom_Ervaringstest, Uitstroom_ErvaringstestWerkproces, KBB
 try: import simplejson as json
@@ -25,7 +27,9 @@ class Wizard(TemplateView):
     
 class ThankYou(View):
     def get(self, request):
-        return HttpResponseForbidden
+        test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
+        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name()}
+        return render(request, 'thankyou.html', c)
     
     def post(self, request):
         test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
@@ -235,5 +239,7 @@ class SubmitTest(View):
         email.attach_alternative(html_body, "text/html")
         email.send()
         
-        return HttpResponse("OK")
+        return HttpResponse('OK')
+    
+
         
