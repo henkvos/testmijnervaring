@@ -12,33 +12,41 @@
         <script type="text/javascript" src="/static/js/jquery-1.6.4.js"></script>
         <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
-         <script type="text/javascript" src="/static/js/jquery-validate/jquery.validate.js"></script>
-         <link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-         <script type="text/javascript" src="/static/js/jquery-validate/jquery.validate.js"></script>
-         -->
-         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
-        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-
-        <!-- custom scripts -->
-        <link type="text/css" href="http://code.jquery.com/ui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
-        
-        <!-- <script type="text/javascript" src="/static/js/qtip-min.js"></script> -->
-        <script type="text/javascript" src="/static/js/wizard.js"></script>
-        
-        <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
-        <link href="/static/css/smart_wizard.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/static/js/jquery-validate/jquery.validate.js"></script>
+        <link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="/static/js/jquery-validate/jquery.validate.js"></script>
+        -->
         <script type="text/javascript">
             //global vars
             var uitstroomid = 0;
-            //var csrf_token = '{{ csrf_token }}';
-            
+            var csrf_token = '{{ csrf_token }}';
+            setCookie('csrftoken', csrf_token);
         </script>
-        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+        <!-- custom scripts -->
+        <link type="text/css" href="http://code.jquery.com/ui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+        <!-- <script type="text/javascript" src="/static/js/qtip-min.js"></script> -->
+        <script type="text/javascript" src="/static/js/wizard.js"></script>
+        <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+        <link href="/static/css/smart_wizard.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-7336675-3']);
+            _gaq.push(['_trackPageview']); (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
     </head>
     <body>
-        
         <div id="content">
             <div id="header">
                 Welk beroep past bij jouw ervaring?
@@ -49,11 +57,11 @@
             <div id="app">
                 {% block content %}{% endblock %}
             </div>
-            
-            <div id="footer" style="margin-top: 10px;">bron: <a href="http://www.kwalificatiesmbo.nl" target="_blank" style="color:#888888; text-decoration: none">www.kwalificatiesmbo.nl</a>   
-                 |    informatie over deze test: <a href="MAILTO:info@rapasso.nl" style="color:#888888; text-decoration: none">info@rapasso.nl</a></div>
-                
+            <div id="footer" style="margin-top: 10px;">
+                bron: <a href="http://www.kwalificatiesmbo.nl" target="_blank" style="color:#888888; text-decoration: none">www.kwalificatiesmbo.nl</a>
+                |    informatie over deze test: <a href="MAILTO:info@rapasso.nl" style="color:#888888; text-decoration: none">info@rapasso.nl</a>
+            </div>
         </div>
-        
+        {% csrf_token %}
     </body>
 </html>
