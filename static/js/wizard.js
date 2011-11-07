@@ -155,6 +155,9 @@ function runWizard() {
 				// errorElement : ""
 				});
 		var submitForm = $("#stap4_aanvraag").validate({
+			errorPlacement : function(error, element) {
+                    error.appendTo(element.parent().next());
+                },
 			success : function() {
 				nrInvalid = submitForm.numberOfInvalids();
 				if (nrInvalid == 0) {
