@@ -25,10 +25,9 @@ class ListDetailsResource(ModelResource):
 class KenniscentrumResource(ListDetailsResource):
     model = KBB
     list_fields = ('name', 'nr', 'url')
-    detail_fields = ('name', 'nr', 'dossiers')
+    detail_fields = ('name', 'nr', 'description','dossiers')
     def dossiers(self, instance):
         doss = Dossier.objects.filter(kenniscentra=instance.nr)
-        print doss
         dosslist = []
         for dos in doss:
             dosdict = {}

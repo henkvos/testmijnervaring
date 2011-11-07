@@ -141,9 +141,6 @@ class ProcessTest(View):
         uitstroom_nr = request.session['uitstroom_nr']
         uitstroom = Uitstroom.objects.get(pk=uitstroom_nr)
         kenniscentra = uitstroom.deelb.dossier.kenniscentra.all()
-        print kenniscentra[0].nr
-        for kbb in kenniscentra:
-            print kbb.nr
         
         test, created = Uitstroom_Ervaringstest.objects.get_or_create(
                                                                       pk=request.session['test_id'], 
