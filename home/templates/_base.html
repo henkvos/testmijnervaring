@@ -16,12 +16,6 @@
         <link type="text/css" href="/static/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="/static/js/jquery-validate/jquery.validate.js"></script>
         -->
-        <script type="text/javascript">
-            //global vars
-            var uitstroomid = 0;
-            var csrf_token = '{{ csrf_token }}';
-            setCookie('csrftoken', csrf_token);
-        </script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
@@ -33,9 +27,17 @@
         <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
         <link href="/static/css/smart_wizard.css" rel="stylesheet" type="text/css">
         <script type="text/javascript">
+            //global vars
+            var uitstroomid = 0;
+            var csrf_token = '{{ csrf_token }}';
+            setCookie('csrftoken', csrf_token);
+
+        </script>
+        <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-7336675-3']);
-            _gaq.push(['_trackPageview']); (function() {
+            _gaq.push(['_trackPageview']);
+            (function() {
                 var ga = document.createElement('script');
                 ga.type = 'text/javascript';
                 ga.async = true;
