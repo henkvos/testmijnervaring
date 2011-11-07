@@ -14,7 +14,7 @@
   border: 0px solid #CCC;
   overflow:visible;
   float:left;
-  width:780px;
+  width:730px;
 }
 .swMain .stepContainer {
   display:block;
@@ -24,7 +24,7 @@
   border: 0px solid #CCC;    
   overflow:hidden;
   clear:both;
-  height:300px;
+  height:330px;
 }
 
 .swMain .stepContainer div.content {
@@ -37,13 +37,13 @@
   font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
   color:#5A5655;   
   background-color:#F8F8F8;  
-  height:300px;
+  height:330px;
   text-align:left;
   overflow:visible;    
   z-index:88; 
   -webkit-border-radius: 5px;
   -moz-border-radius  : 5px;
-  width:768px;
+  width:718px;
   clear:both;
 }
 
@@ -72,7 +72,7 @@
   margin:0;   
   border:1px solid #E0E0E0;
   padding:5px;   
-  font: bold 16px Verdana, Arial, Helvetica, sans-serif; 
+  font: bold 14px Verdana, Arial, Helvetica, sans-serif; 
   color:#5A5655;   
   background-color:#E0E0E0;
   clear:both;
@@ -109,8 +109,8 @@
   float:left;
   margin:0;
   padding:3px;
-  height:60px;
-  width:180px;
+  height:50px;
+  width:168px;
   text-decoration: none;
   outline-style:none;
   -moz-border-radius  : 5px;
@@ -120,11 +120,11 @@
 .swMain ul.anchor li a .stepNumber{
   position:relative;
   float:left;
-  width:30px;
+  width:24px;
   text-align: center;
-  padding:5px;
+  padding:3px;
   padding-top:0;
-  font: bold 30px Verdana, Arial, Helvetica, sans-serif;
+  font: bold 24px Verdana, Arial, Helvetica, sans-serif;
 }
 .swMain ul.anchor li a .stepDesc{
   position:relative;
@@ -192,7 +192,7 @@
   text-decoration: none;
   text-align: center;
   font: bold 13px Verdana, Arial, Helvetica, sans-serif;
-  width:100px;
+  width:80px;
   color:#FFF;
   outline-style:none;
   background-color:   #5A5655;
@@ -214,7 +214,7 @@
   text-decoration: none;
   text-align: center;
   font: bold 13px Verdana, Arial, Helvetica, sans-serif;
-  width:100px;
+  width:80px;
   color:#FFF;
   outline-style:none;
   background-color:   #5A5655;
@@ -230,7 +230,7 @@
   text-decoration: none;
   text-align: center;
   font: bold 13px Verdana, Arial, Helvetica, sans-serif;
-  width:100px;
+  width:80px;
   color:#FFF;
   outline-style:none;
   background-color:   #5A5655;
@@ -279,7 +279,7 @@
   -moz-border-radius  : 5px;
   -webkit-border-radius: 5px;
   z-index:999;
-  min-width:300px;  
+  min-width:270px;  
 }
 .swMain .msgBox .content {
   font: normal 12px Verdana,Arial,Helvetica,sans-serif;

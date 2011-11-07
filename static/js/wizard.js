@@ -12,6 +12,8 @@ $(document).ready(function() {
 });
 
 function runWizard() {
+	//$('#header-phrase').empty();
+	$('#header-phrase').remove();
 	$("#app").load('/startwizard', null, function() {
 
 				$('#wizard').smartWizard({
@@ -189,7 +191,6 @@ function runWizard() {
 					});
 			naw = $('#stap4_aanvraag').serializeArray();
 			$.post('/submittest', naw, function() {
-						$('#header-phrase').empty();
 						$.post('/thankyou', function(data) {
 									$('#app').html(data);
 								});
