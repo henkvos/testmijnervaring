@@ -18,7 +18,7 @@ function runWizard() {
 
 				$('#wizard').smartWizard({
 							contentURL : '/wizard',
-							// transitionEffect:'slideleft',
+							//transitionEffect:'',
 							contentCache : false,
 							onLeaveStep : serForm,
 							onFinish : submitTest
@@ -251,5 +251,4 @@ function setCookie(name, value, days) {
 	document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-// xhr.setRequestHeader("X-CSRFToken", ;
 

@@ -60,7 +60,7 @@ input.error {
 select.error {
     border: 2px solid red;
 }
-radio.error {
+input:radio.error {
     border: 1px dotted red;
 }
 
@@ -104,6 +104,7 @@ style {
     margin-left: 195px;
     vertical-align: top;
     text-align: center;
+    display: inline-block;
 }
 
 #kbb-description {

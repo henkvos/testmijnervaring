@@ -160,8 +160,10 @@
                     if(ajaxurl && ajaxurl.length>0){
                        if(hasContent && stepNum==1){
                        //if(options.contentCache && hasContent){
+                       
                            showStep(stepIdx);                          
                        }else{
+                       	    
                            $.ajax({
                             url: ajaxurl,
                             type: "POST",
@@ -185,11 +187,13 @@
                 }
                 
                 function showStep(stepIdx){
+                	//alert(stepIdx);
                     var selStep = steps.eq(stepIdx); 
                     var curStep = steps.eq(curStepIdx);
                     if(stepIdx != curStepIdx){
                       if($.isFunction(options.onLeaveStep)) {
                         if(!options.onLeaveStep.call(this,$(curStep))){
+                        	//alert('return false');
                           return false;
                         }
                       }
@@ -201,8 +205,10 @@
                             curStepIdx =  stepIdx;                        
                             SetupStep(curStep,selStep);
                           });
-                    } else if(options.transitionEffect == 'fade'){                      
+                    } else if(options.transitionEffect == 'fade'){  
+                    	//alert(curStep);
                       $($(curStep, obj).attr("href"), obj).fadeOut("fast",function(e){
+                      	    //alert('fade out');
                             $($(selStep, obj).attr("href"), obj).fadeIn("fast");
                             curStepIdx =  stepIdx;                        
                             SetupStep(curStep,selStep);                           
@@ -238,13 +244,15 @@
                     } else{
                         $($(curStep, obj).attr("href"), obj).hide(); 
                         $($(selStep, obj).attr("href"), obj).show();
-                        curStepIdx =  stepIdx;                        
+                        curStepIdx =  stepIdx;  
+                        
                         SetupStep(curStep,selStep);
                     }
                     return true;
                 }
                 
                 function SetupStep(curStep,selStep){
+                   //alert('SetupStep');
                    $(curStep, obj).removeClass("selected");
                    $(curStep, obj).addClass("done");
                    

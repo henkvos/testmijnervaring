@@ -11,7 +11,7 @@
                 source : function(request, response) {
                     $.ajax({
                         //url: "/colo/dossiers/startswith",
-                        url : "/colo/uitstromen/contains",
+                        url : "/colo/uitstromen/contains?format=json",
                         dataType : "json",
                         data : {
 
@@ -34,11 +34,13 @@
                     return false;
                 },
                 select : function(event, ui) {
-                    var url = '/colo/uitstromen/' + ui.item.id + '/';
+                    //alert('select ev');
+                    var url = '/colo/uitstromen/' + ui.item.id + '/?format=json';
                     var resp = $.ajax({
                         url : url,
                         dataType : 'json',
                         success : function(data) {
+                            
                             $('#log').empty();
                             $("<div/>").html(data.contextvandeuitstroom).prependTo("#log");
                             $("#log").scrollTop(0);
