@@ -1,0 +1,291 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Test Mijn Ervaring</title>
+
+<link type="text/css" href="http://code.jquery.com/ui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="/static/css/smart_wizard.css" type="text/css">
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
+
+<!--
+<script type="text/javascript" src="/static/js/jquery-1.7.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.smartWizard-2.0.js"></script>
+<script type="text/javascript" src="/static/js/jquery-validation-1.9.0 4/jquery.validate.js"></script>
+-->
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // Smart Wizard     
+        $('#wizard').smartWizard({
+            contentURL:'/wizard',
+            transitionEffect:'fade',
+            onFinish:submitTest,
+            onLeaveStep : serForm
+            });
+      
+        function submitTest() {
+        jQuery.validator.setDefaults({
+                // errorClass: "ui-state-error ui-corner-all"
+                // errorElement : ""
+                });
+        var submitForm = $("#stap4_aanvraag").validate({
+            errorPlacement : function(error, element) {
+                    error.appendTo(element.parent().next());
+                },
+            success : function() {
+                nrInvalid = submitForm.numberOfInvalids();
+                if (nrInvalid == 0) {
+                    $('#wizard').smartWizard('hideMessage');
+                    $('#wizard').smartWizard('setError', {
+                                stepnum : 4,
+                                iserror : false
+                            });
+                    return true;
+                } else {
+                    $('#wizard').smartWizard('setError', {
+                                stepnum : 4,
+                                iserror : true
+                            });
+                    $('#wizard')
+                            .smartWizard('showMessage',
+                                    'Vul de verplichte velden in alvorens de aanvraag te verzenden');
+                    return false;
+                }
+            }
+
+        });
+
+        if ($("#stap4_aanvraag").valid()) {
+            $('#wizard').smartWizard('hideMessage');
+            $('#wizard').smartWizard('setError', {
+                        stepnum : 4,
+                        iserror : false
+                    });
+            naw = $('#stap4_aanvraag').serializeArray();
+            $.post('/submittest', naw, function() {
+                         //window.location.href = "/ie7thankyou";
+                         $.post('/thankyou', function(data) {
+                                    $('#app').html(data);
+                                });
+                    });
+
+            //
+        } else {
+            $('#wizard').smartWizard('setError', {
+                        stepnum : 4,
+                        iserror : true
+                    });
+            $('#wizard')
+                    .smartWizard('showMessage',
+                            'Vul de verplichte velden in alvorens je de aanvraag verzend');
+            return false;
+        }
+
+    };
+      function serForm(){
+        if (self.stepNum == 2) {
+            id = $("#uitstroom_id").val();
+            if (!id) {
+                $('#wizard').smartWizard('setError', {
+                            stepnum : 1,
+                            iserror : true
+                        });
+                $('#wizard').smartWizard('showMessage', 'Kies eerst een beroep');
+                $("#beroep").addClass("error");
+                return false;
+                // return true;
+            } else {
+                $('#wizard').smartWizard('setError', {
+                            stepnum : 1,
+                            iserror : false
+                        });
+                $('#wizard').smartWizard('hideMessage');
+
+                return true;
+            }
+
+        } else if (self.stepNum == 3) {
+            
+            var wpForm = $("#testwerkprocessen").validate({
+                errorPlacement : function(error, element) {
+                    error.appendTo(element.parent().next());
+                },
+                success : function() {
+                    nrInvalid = wpForm.numberOfInvalids();
+                    if (nrInvalid == 0) {
+                        $('#wizard').smartWizard('hideMessage');
+                        $('#wizard').smartWizard('setError', {
+                                    stepnum : 2,
+                                    iserror : false
+                                });
+                        return true;
+                    } else {
+                        $('#wizard').smartWizard('setError', {
+                                    stepnum : 2,
+                                    iserror : true
+                                });
+                        $('#wizard').smartWizard('showMessage',
+                                'Vul de lijst volledig in');
+                        return false;
+                    }
+
+                }
+
+            });
+
+            if ($("#testwerkprocessen").valid()) {
+                $('#wizard').smartWizard('hideMessage');
+                $('#wizard').smartWizard('setError', {
+                            stepnum : 2,
+                            iserror : false
+                        });
+                wplist = $('#testwerkprocessen').serializeArray();
+                $.post('/processtest', wplist);
+                return true;
+
+                //
+            } else {
+                $('#wizard').smartWizard('setError', {
+                            stepnum : 2,
+                            iserror : true
+                        });
+                $('#wizard').smartWizard('showMessage',
+                        'Vul de lijst volledig in');
+                return false;
+            }
+
+        } else if (self.stepNum == 4) {
+            var st3Form = $("#stap3_toekomst").validate({
+                errorPlacement : function(error, element) {
+                    error.appendTo(element.parent().next());
+                },
+                success : function() {
+                    nrInvalid = st3Form.numberOfInvalids();
+                    if (nrInvalid == 0) {
+                        $('#wizard').smartWizard('hideMessage');
+                        $('#wizard').smartWizard('setError', {
+                                    stepnum : 3,
+                                    iserror : false
+                                });
+                        return true;
+                    } else {
+                        $('#wizard').smartWizard('setError', {
+                                    stepnum : 3,
+                                    iserror : true
+                                });
+                        $('#wizard').smartWizard('showMessage',
+                                'Vul de lijst volledig in');
+                        return false;
+                    }
+
+                }
+
+            });
+
+            if ($("#stap3_toekomst").valid()) {
+                $('#wizard').smartWizard('setError', {
+                            stepnum : 3,
+                            iserror : false
+                        });
+                $('#wizard').smartWizard('hideMessage');
+                toekomst = $('#stap3_toekomst').serializeArray();
+                $.post('/processtoekomst', toekomst);
+                return true;
+            } else {
+                $('#wizard').smartWizard('setError', {
+                            stepnum : 3,
+                            iserror : true
+                        });
+                $('#wizard').smartWizard('showMessage',
+                        'Vul de lijst volledig in');
+                return false;
+
+            }
+
+        }
+        
+        else {
+            alert('ser form');
+        }
+      }       
+        });
+</script>
+
+
+</head><body>
+<div id="content">
+            <div id="header">
+                Welk beroep past bij jouw ervaring?
+            </div>
+
+            <div id="app">
+
+                <table align="center" border="0" cellpadding="0" cellspacing="0">
+<tr><td> 
+<!-- Smart Wizard -->
+        <div id="wizard" class="swMain">
+            <ul>
+                <li>
+            <a href="#step-1"> <label class="stepNumber">1</label> <span class="stepDesc"> Kies beroep
+                <br />
+                <small>Kies een beroep</small> </span> </a>
+        </li>
+        <li>
+            <a href="#step-2"> <label class="stepNumber">2</label> <span class="stepDesc"> Jouw ervaring
+                <br />
+                <small>Geef aan wat je kan</small> </span> </a>
+        </li>
+        <li>
+            <a href="#step-3"> <label class="stepNumber">3</label> <span class="stepDesc"> Jouw toekomst
+                <br />
+                <small>Geef aan wat je wil</small> </span> </a>
+        </li>
+        <li>
+            <a href="#step-4"> <label class="stepNumber">4</label> <span class="stepDesc"> Aanvraag
+                <br />
+                <small>Verzend aanvraag</small> </span> </a>
+        </li>
+            </ul>
+            <div id="step-1">   
+           
+
+                        
+        </div>
+            <div id="step-2">
+           
+        </div>                      
+            <div id="step-3">
+            
+                                                
+        </div>
+            <div id="step-4">
+                                      
+        </div>
+        </div>
+<!-- End SmartWizard Content -->        
+
+</td></tr>
+</table>                       
+
+            </div>
+            
+            <div id="footer" style="margin-top: 10px;">
+                bron: <a href="http://www.kwalificatiesmbo.nl" target="_blank" style="color:#888888; text-decoration: none">www.kwalificatiesmbo.nl</a>
+                |    informatie over deze test: <a href="MAILTO:info@rapasso.nl" style="color:#888888; text-decoration: none">info@rapasso.nl</a>
+            </div>
+        </div>
+
+
+
+
+</body>
+</html>

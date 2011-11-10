@@ -56,6 +56,7 @@
   padding:            0;    
   color:              #5A5655;   
   background-color:   #F8F8F8;
+  font: normal 11px Verdana, Arial, Helvetica, sans-serif; 
   height:40px;
   text-align:left;
   overflow:auto;    
@@ -136,7 +137,7 @@
   font: bold 14px Verdana, Arial, Helvetica, sans-serif;
 }
 .swMain ul.anchor li a .stepDesc small{
-  font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+  font: normal 11px Verdana, Arial, Helvetica, sans-serif;
 }
 .swMain ul.anchor li a.selected{
   color:#F8F8F8;
@@ -282,7 +283,7 @@
   min-width:270px;  
 }
 .swMain .msgBox .content {
-  font: normal 12px Verdana,Arial,Helvetica,sans-serif;
+  font: normal 11px Verdana,Arial,Helvetica,sans-serif;
   padding: 0px;
   float:left;
 }

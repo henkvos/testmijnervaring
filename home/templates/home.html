@@ -1,32 +1,43 @@
 {% extends "_base.html" %}
 {% block content %}
-
-
-        
-        <div id="icons">
-            <div id="certificaat">
+  <div id="icons">
+        <table>
+            <tr>
+                <td><div id="certificaat" style="display: inline-block;">
                 <img src="/static/img/certificaat.png" alt="certificaat">
-            </div>
-            <div id="opleiding">
+            </div></td>
+                <td><div id="opleiding" style="display: inline-block;">
                 <img src="/static/img/opleiding.png" alt="opleiding">
-            </div>
-            <div id="diploma">
+            </div></td>
+                <td><div id="diploma" style="display: inline-block;">
                 <img src="/static/img/diploma.png" alt="diploma">
-            </div>
-        </div>
-        <div id="phrases">
-            <div id="certificaat-phrase" class="phrase">
+            </div></td>
+            </tr>
+            <tr>
+                <td><div id="certificaat-phrase" class="phrase">
                 Is jouw ervaring <br /> een diploma waard?
                 <div class="starttest">Doe de test!</div>
-            </div>
-            <div id="opleiding-phrase" class="phrase">
+            </div></td>
+                <td><div id="opleiding-phrase" class="phrase">
                 Welke vakgebieden <br /> kun je bijscholen?
                 <div class="starttest">Doe de test!</div>
-            </div>
-            <div id="diploma-phrase" class="phrase">
+            </div></td>
+                <td><div id="diploma-phrase" class="phrase">
                 Kom je in aanmerking <br /> voor een certificaat?
                 <div class="starttest">Doe de test!</div>
-            </div>
+            </div></td>
+            </tr>
+            
+        </table>
+   </div>      
+            
+            
+            
+       
+        <div id="phrases">
+            
+            
+            
         </div>
         <div id="aankondiging" class="starttest">
             <!-- <span id="startwizard">Doe de test! </span> -->
@@ -34,8 +45,5 @@
         <div id="naar-rapasso">
             Deze test wordt mogelijk gemaakt door <a href="http://www.rapasso.nl" target="_blank">Rapasso</a>. Begeleid personen van A naar B! 
         </div>
-        
-        {% csrf_token %}
-
 
 {% endblock %}

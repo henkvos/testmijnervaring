@@ -1,19 +1,26 @@
 $(document).ready(function() {
 	$(".starttest").click(function() {
+		        $('#header-phrase').remove();
+		        if ($.browser.msie  && parseInt($.browser.version) == 7) {
+  window.location.href = "/ie7test";
+} else {
+  runWizard();
+}
+		        
 				runWizard();
 			});
 
 	// send crsf token for django's csrf protection
-	$("body").bind("ajaxSend", function(elm, xhr, s) {
-				if (s.type == "POST") {
-					xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-				}
-			});
+	//$("body").bind("ajaxSend", function(elm, xhr, s) {
+	//			if (s.type == "POST") {
+	//				xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+	//			}
+	//		});
 });
 
 function runWizard() {
-	//$('#header-phrase').empty();
-	$('#header-phrase').remove();
+	
+	
 	$("#app").load('/startwizard', null, function() {
 
 				$('#wizard').smartWizard({

@@ -10,6 +10,7 @@ from django.template.loader import render_to_string, get_template
 from django.utils.html import strip_tags
 from django.core import signals
 from home.signals import send_test_results
+from django.core.context_processors import csrf
 
 from evc.models import Uitstroom, Uitstroom_Kerntaak, Uitstroom_Werkproces, Uitstroom_Ervaringstest, Uitstroom_ErvaringstestWerkproces, KBB
 try: import simplejson as json
@@ -21,10 +22,32 @@ import uuid
 class Home(TemplateView):
     template_name = 'home.html'
 
+'''  
+class Home(View):
+    def get(self, request):
+        template_name = 'home.html'
+        c = {}
+        c.update(csrf(request))
+        return render_to_response(template_name, c)
+'''
     
 class Wizard(TemplateView):
     template_name = 'wizard.html'
     
+class IE7Test(TemplateView):
+    template_name = 'ie7test.html'
+'''
+class ThankYouIE7(View):
+    def get(self, request):
+        test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
+        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name()}
+        return render(request, 'thankyou7.html', c)
+    
+    def post(self, request):
+        test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])
+        c = {"first_name": test.first_name, "last_name": test.last_name, "email": test.email, "title":test.name()}
+        return render(request, 'thankyou7.html', c)
+'''   
 class ThankYou(View):
     def get(self, request):
         test = Uitstroom_Ervaringstest.objects.get(pk=request.session['test_id'])

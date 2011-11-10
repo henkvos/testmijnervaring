@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic import TemplateView
-from home.views import Home, Wizard, Step, StoreSelection, ProcessTest, ProcessStep3, SubmitTest, ThankYou
+from home.views import Home, Wizard, Step, StoreSelection, ProcessTest, ProcessStep3, SubmitTest, ThankYou, IE7Test #,ThankYouIE7
 
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +19,8 @@ urlpatterns = patterns('',
     (r'^submittest', SubmitTest.as_view()),
     (r'^thankyou', ThankYou.as_view()),
     (r'^colo', include('colo.urls')),
+    ('^ie7test', IE7Test.as_view()),
+    #('^ie7thankyou', ThankYouIE7.as_view()),
     # Examples:
     # url(r'^$', 'testmijnervaring.views.home', name='home'),
     # url(r'^testmijnervaring/', include('testmijnervaring.foo.urls')),
